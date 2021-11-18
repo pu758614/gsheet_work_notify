@@ -13,11 +13,6 @@
         'id'  => '1',
 
     ));
-    echo '<pre>';
-    print_r($user_data);
-    echo '</pre>';
-    exit;
-
 
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
 
