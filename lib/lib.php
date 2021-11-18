@@ -20,7 +20,7 @@
         function notifyAction($uuid,$msg){
             return array(
                 'error' => false,
-                'msg' => ''
+                'msg' => ' '
             );
         }
 
