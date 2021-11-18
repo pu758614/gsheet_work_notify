@@ -2,7 +2,7 @@
     require 'vendor/autoload.php';
     include_once("lib/lib.php");
 
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__."/gsheet-work-notify");
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
     $dotenv->load();
     $db = new db_lib();
     echo '<pre>';
