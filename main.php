@@ -1,14 +1,14 @@
 <?php
     require 'vendor/autoload.php';
     include_once("lib/lib.php");
-    echo '<pre>';
-    print_r(__DIR__);
-    echo '</pre>';
-    exit;
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__."/gsheet-work-notify");
     $dotenv->load();
     $db = new db_lib();
-
+    echo '<pre>';
+    print_r($_ENV);
+    echo '</pre>';
+    exit;
     $spreadsheet_id = isset($_ENV['SPREADSHEET_ID'])?$_ENV['SPREADSHEET_ID']:'';
     $now_day        = isset($_ENV['NOW_DAY'])?$_ENV['NOW_DAY']:'';
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
