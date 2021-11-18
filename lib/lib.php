@@ -5,8 +5,10 @@
         function __construct(){
             date_default_timezone_set('asia/taipei');
             header("Content-type: text/html; charset=utf-8");
-            $dotenv = Dotenv\Dotenv::createImmutable(__DIR__."/..");
-            $dotenv->load();
+            if (file_exists(__DIR__ . '/.env')) {
+                $dotenv = Dotenv\Dotenv::createImmutable(__DIR__."/..");
+                $dotenv->load();
+            }
             $host      = isset($_ENV['HOST'])?$_ENV['HOST']:'';
             $user_name = isset($_ENV['USER'])?$_ENV['USER']:'';
             $psw       = isset($_ENV['PSW'])?$_ENV['PSW']:'';
