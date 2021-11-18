@@ -2,7 +2,6 @@
     require 'vendor/autoload.php';
     include_once("lib/lib.php");
 
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
     try {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
         $dotenv->load();
