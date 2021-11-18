@@ -7,11 +7,6 @@
         $dotenv->load();
     }
 
-    //$db = new db_lib();
-    echo '<pre>';
-    print_r($_ENV);
-    echo '</pre>';
-    exit;
     $spreadsheet_id = isset($_ENV['SPREADSHEET_ID'])?$_ENV['SPREADSHEET_ID']:'';
     $now_day        = isset($_ENV['NOW_DAY'])?$_ENV['NOW_DAY']:'';
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
