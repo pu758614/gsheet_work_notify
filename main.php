@@ -2,12 +2,11 @@
     require 'vendor/autoload.php';
    // include_once("lib/lib.php");
 
-    try {
+   if (file_exists(__DIR__ . '/.env')) {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
         $dotenv->load();
-    } catch (InvalidPathException $e) {
-        // Do something
     }
+
     //$db = new db_lib();
     echo '<pre>';
     print_r($_ENV);
