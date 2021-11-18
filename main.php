@@ -8,7 +8,7 @@
     } catch (InvalidPathException $e) {
         // Do something
     }
-    $db = new db_lib();
+    //$db = new db_lib();
     echo '<pre>';
     print_r($_ENV);
     echo '</pre>';
