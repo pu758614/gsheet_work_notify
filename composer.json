@@ -3,6 +3,6 @@
         "google/apiclient": "2.0",
         "adodb/adodb-php": "5.21",
         "vlucas/phpdotenv": "^5.4",
-        "guzzlehttp/guzzle": "^6.3.0"
+        "guzzlehttp/guzzle": "^6.5.0"
     }
 }
