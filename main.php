@@ -1,12 +1,12 @@
 <?php
     require 'vendor/autoload.php';
-   // include_once("lib/lib.php");
+    include_once("lib/lib.php");
 
-   if (file_exists(__DIR__ . '/.env')) {
+    if (file_exists(__DIR__ . '/.env')) {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
         $dotenv->load();
     }
-
+    $db = new db_lib();
     $spreadsheet_id = isset($_ENV['SPREADSHEET_ID'])?$_ENV['SPREADSHEET_ID']:'';
     $now_day        = isset($_ENV['NOW_DAY'])?$_ENV['NOW_DAY']:'';
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
@@ -86,4 +86,4 @@
     }
 
 
-    //print_r($user_item_list);
+    print_r($user_item_list);
