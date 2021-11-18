@@ -27,6 +27,7 @@
 
         function getGoogleSheet($id){
             // 建立 Google Client
+            exit;
             $client = new \Google_Client();
             $client->setApplicationName('Google Sheets and PHP');
             // 設定權限
