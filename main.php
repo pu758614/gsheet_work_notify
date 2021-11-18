@@ -9,13 +9,13 @@
     $db = new db_lib();
     $spreadsheet_id = isset($_ENV['SPREADSHEET_ID'])?$_ENV['SPREADSHEET_ID']:'';
     $now_day        = isset($_ENV['NOW_DAY'])?$_ENV['NOW_DAY']:'';
-    $user_data = $db->getSingleByArray('sheet_notify_user',array(
-        'id'  => '1',
 
-    ));
 
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
-
+    echo '<pre>';
+    print_r($list_data);
+    echo '</pre>';
+    exit;
     $next_day = date("m/d",strtotime("next Saturday"));
     $nex_data = array();
     foreach ($list_data as $key => $data) {
