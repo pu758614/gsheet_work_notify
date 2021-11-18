@@ -9,9 +9,9 @@
                 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__."/..");
                 $dotenv->load();
             }
-            $host      = isset($_ENV['HOST'])?$_ENV['HOST']:'';
-            $user_name = isset($_ENV['USER'])?$_ENV['USER']:'';
-            $psw       = isset($_ENV['PSW'])?$_ENV['PSW']:'';
+            $host      = isset($_ENV['DB_HOST'])?$_ENV['DB_HOST']:'';
+            $user_name = isset($_ENV['DB_USER'])?$_ENV['DB_USER']:'';
+            $psw       = isset($_ENV['DB_PSW'])?$_ENV['DB_PSW']:'';
             $db_name   = isset($_ENV['DB_NAME'])?$_ENV['DB_NAME']:'';
 
             $this->db = ADONewConnection('mysqli');
