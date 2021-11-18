@@ -13,11 +13,8 @@
             $user_name = isset($_ENV['DB_USER'])?$_ENV['DB_USER']:'';
             $psw       = isset($_ENV['DB_PSW'])?$_ENV['DB_PSW']:'';
             $db_name   = isset($_ENV['DB_NAME'])?$_ENV['DB_NAME']:'';
-            echo '<pre>';
-            print_r($_ENV);
-            echo '</pre>';
             $this->db = ADONewConnection('mysqli');
-            $this->db->db_link->debug = 1;
+
             $this->db->Connect($host,$user_name,$psw,$db_name);
             $this->db->SetFetchMode(ADODB_FETCH_ASSOC);
         }

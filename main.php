@@ -9,7 +9,7 @@
     $db = new db_lib();
     $spreadsheet_id = isset($_ENV['SPREADSHEET_ID'])?$_ENV['SPREADSHEET_ID']:'';
     $now_day        = isset($_ENV['NOW_DAY'])?$_ENV['NOW_DAY']:'';
-    exit;
+
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
 
     $next_day = date("m/d",strtotime("next Saturday"));
