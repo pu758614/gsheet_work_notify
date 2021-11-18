@@ -1,0 +1,7 @@
+{
+    "require": {
+        "google/apiclient": "2.0",
+        "adodb/adodb-php": "5.20",
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
