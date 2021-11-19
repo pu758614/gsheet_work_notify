@@ -88,9 +88,9 @@ class LINEBotTiny
 
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
         $response = $bot->pushMessage($user_id, $textMessageBuilder);
-
-        //echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
-        error_log('XDDDDDD:: ' . $response->getHTTPStatus() . ' ' . $response->getRawBody());
+        if ($response->getHTTPStatus() !='200') {
+            error_log('Request failed: '. $response->getHTTPStatus() . ' ' . $response->getRawBody();
+        }
     }
 
 
