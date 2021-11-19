@@ -17,15 +17,16 @@ foreach ($client->parseEvents() as $event) {
     $user_id = $event['source']['userId'];
     //$guestdata = getGuestInfo($channelAccessToken,$channelSecret,$user_id);
     $user_data = $db->getSingleById('sheet_notify_user','line_user_uuid',$user_id);
-        if(empty($user_data)){
-            $profile = $client->getGuestInfo($user_id);
-            $db->insertData('sheet_notify_user',array(
-                'line_user_uuid' => $user_id,
-                'line_name'      => isset($profile['displayName'])?$profile['displayName']:'',
-                'modify_time'    => date('Y-m-d H:i:s'),
-                'create_time'    => date('Y-m-d H:i:s'),
-            ));
-        }
+    if(empty($user_data)){
+        $profile = $client->getGuestInfo($user_id);
+        $db->insertData('sheet_notify_user',array(
+            'line_user_uuid' => $user_id,
+            'line_name'      => isset($profile['displayName'])?$profile['displayName']:'',
+            'modify_time'    => date('Y-m-d H:i:s'),
+            'create_time'    => date('Y-m-d H:i:s'),
+        ));
+    }
+}
 //     switch ($event['type']) {
 //         case 'follow':
 
@@ -115,4 +116,4 @@ foreach ($client->parseEvents() as $event) {
 //             error_log('Unsupported event type: ' . $event['type']);
 //             break;
 //     }
-// };
+ //};
