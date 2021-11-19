@@ -10,7 +10,7 @@ if (file_exists(__DIR__ . '/.env')) {
 }
 $channel_access_token = isset($_ENV['CHANNEL_ACCESS_TOKEN'])?$_ENV['CHANNEL_ACCESS_TOKEN']:'';
 $channel_secret       = isset($_ENV['CHANNEL_SECRET'])?$_ENV['CHANNEL_SECRET']:'';
-
+$db = new db_lib();
 $client = new LINEBotTiny($channel_access_token, $channel_secret);
 foreach ($client->parseEvents() as $event) {
 
