@@ -9,7 +9,7 @@ if (file_exists(__DIR__ . '/.env')) {
     $dotenv->load();
 }
 $channel_access_token = isset($_ENV['CHANNEL_ACCESS_TOKEN'])?$_ENV['CHANNEL_ACCESS_TOKEN']:'';
-$channel_secret        = isset($_ENV['CHANNEL_SECRET'])?$_ENV['CHANNEL_SECRET']:'';
+$channel_secret       = isset($_ENV['CHANNEL_SECRET'])?$_ENV['CHANNEL_SECRET']:'';
 
 $client = new LINEBotTiny($channel_access_token, $channel_secret);
 foreach ($client->parseEvents() as $event) {
@@ -20,20 +20,21 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
+                    $client->reply_text($event['replyToken'],"123456");
                     // if($message['text']=='三民聖教會'){
 
-                        $client->replyMessage([
-                            'replyToken' => $event['replyToken'],
-                            'messages' => [
-                                [
-                                    "type"=>"location",
-                                    "title"=>"灣告輝底家啦！！",
-                                    "address"=>"813左營區重立路61號",
-                                    "latitude"=>'22.673217',
-                                    "longitude"=>'120.313176'
-                                ]
-                            ]
-                        ]);
+                        // $client->replyMessage([
+                        //     'replyToken' => $event['replyToken'],
+                        //     'messages' => [
+                        //         [
+                        //             "type"=>"location",
+                        //             "title"=>"灣告輝底家啦！！",
+                        //             "address"=>"813左營區重立路61號",
+                        //             "latitude"=>'22.673217',
+                        //             "longitude"=>'120.313176'
+                        //         ]
+                        //     ]
+                        // ]);
                     //     write_log($db,$guestdata['displayName'],$user_id,$message['text'],'4');
                     //     break;
                     // }
