@@ -83,7 +83,7 @@ class LINEBotTiny
     //     ));
     // }
     public function toyMessage($user_id,$message) {
-        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($this->channelAccessToken,);
+        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($this->channelAccessToken);
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $this->channelSecret]);
 
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
