@@ -121,6 +121,17 @@ class LINEBotTiny
         }
     }
 
+    function getGuestInfo($user_id){
+        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($this->channelAccessToken);
+        $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $this->channelSecret]);
+        $response = $bot->getProfile($user_id);
+        $profile = array();
+        if ($response->isSucceeded()) {
+            $profile = $response->getJSONDecodedBody();
+        }
+        return $profile;
+    }
+
     private function sign($body)
     {
         $hash = hash_hmac('sha256', $body, $this->channelSecret, true);
