@@ -2,6 +2,7 @@
     "require": {
         "google/apiclient": "2.11",
         "adodb/adodb-php": "5.21",
-        "vlucas/phpdotenv": "^5.4"
+        "vlucas/phpdotenv": "^5.4",
+        "linecorp/line-bot-sdk": "^7.3"
     }
 }

@@ -12,10 +12,6 @@
 
 
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
-    echo '<pre>';
-    print_r($list_data);
-    echo '</pre>';
-    exit;
     $next_day = date("m/d",strtotime("next Saturday"));
     $nex_data = array();
     foreach ($list_data as $key => $data) {
