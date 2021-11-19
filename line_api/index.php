@@ -14,18 +14,20 @@ $db = new db_lib();
 $client = new LINEBotTiny($channel_access_token, $channel_secret);
 foreach ($client->parseEvents() as $event) {
 
-    $user_id = $event['source']['userId'];
-    //$guestdata = getGuestInfo($channelAccessToken,$channelSecret,$user_id);
-    $user_data = $db->getSingleById('sheet_notify_user','line_user_uuid',$user_id);
+    $line_uuid = $event['source']['userId'];
+    $user_data = $db->getSingleById('sheet_notify_user','line_user_uuid',$line_uuid);
     if(empty($user_data)){
-        $profile = $client->getGuestInfo($user_id);
-        $db->insertData('sheet_notify_user',array(
-            'line_user_uuid' => $user_id,
+        $profile = $client->getGuestInfo($line_uuid);
+        $user_id = $db->insertData('sheet_notify_user',array(
+            'line_user_uuid' => $line_uuid,
             'line_name'      => isset($profile['displayName'])?$profile['displayName']:'',
             'modify_time'    => date('Y-m-d H:i:s'),
             'create_time'    => date('Y-m-d H:i:s'),
         ));
+    }else{
+        $user_id = $user_data['id'];
     }
+    $client->reply_text_to($user_id,"YOYOYOYO");
 }
 //     switch ($event['type']) {
 //         case 'follow':

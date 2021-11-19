@@ -71,6 +71,17 @@ class LINEBotTiny
         return $data['events'];
     }
 
+    public function reply_text_to($user_id,$text=''){
+        $this->replyMessage(array(
+            'to' => $user_id,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $text
+                ),
+            )
+        ));
+    }
 
     public function reply_text($replyToken,$text=''){
         $this->replyMessage(array(
