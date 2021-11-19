@@ -1,7 +1,7 @@
 <?php
     require 'vendor/autoload.php';
     include_once("lib/lib.php");
-
+    include_once("lib//LINEBotTiny.php");
     if (file_exists(__DIR__ . '/.env')) {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
         $dotenv->load();
@@ -9,8 +9,11 @@
     $db = new db_lib();
     $spreadsheet_id = isset($_ENV['SPREADSHEET_ID'])?$_ENV['SPREADSHEET_ID']:'';
     $now_day        = isset($_ENV['NOW_DAY'])?$_ENV['NOW_DAY']:'';
+    $channel_access_token = isset($_ENV['CHANNEL_ACCESS_TOKEN'])?$_ENV['CHANNEL_ACCESS_TOKEN']:'';
+    $channel_secret       = isset($_ENV['CHANNEL_SECRET'])?$_ENV['CHANNEL_SECRET']:'';
 
-
+    $client = new LINEBotTiny($channel_access_token, $channel_secret);
+    $client->toyMessage('Ubdea301f314d01c74045b234820eacde','測試排程'.date('Y-m-d H:i:s'));
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
     $next_day = date("m/d",strtotime("next Saturday"));
     $nex_data = array();
