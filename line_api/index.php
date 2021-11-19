@@ -27,7 +27,7 @@ foreach ($client->parseEvents() as $event) {
     }else{
         $user_id = $user_data['id'];
     }
-    $client->reply_text_to($user_id,"YOYOYOYO");
+    $client->toyMessage($user_id,"YOYOYOYO");
 }
 //     switch ($event['type']) {
 //         case 'follow':

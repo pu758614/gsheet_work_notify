@@ -71,37 +71,25 @@ class LINEBotTiny
         return $data['events'];
     }
 
-    public function reply_text_to($user_id,$text=''){
-        $this->toyMessage(array(
-            'to' => $user_id,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => $text
-                ),
-            )
-        ));
-    }
-    public function toyMessage($message)
-    {
-        $header = array(
-            'Content-Type: application/json',
-            'Authorization: Bearer ' . $this->channelAccessToken,
-        );
+    // public function reply_text_to($user_id,$text=''){
+    //     $this->toyMessage(array(
+    //         'to' => $user_id,
+    //         'messages' => array(
+    //             array(
+    //                 'type' => 'text',
+    //                 'text' => $text
+    //             ),
+    //         )
+    //     ));
+    // }
+    public function toyMessage($user_id,$message) {
+        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($this->channelAccessToken,);
+        $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $this->channelSecret]);
 
-        $context = stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => implode("\r\n", $header),
-                'content' => json_encode($message),
-            ],
-        ]);
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
+        $response = $bot->pushMessage($user_id, $textMessageBuilder);
 
-        $response = file_get_contents('https://api.line.me/v2/bot/message/push', false, $context);
-        if (strpos($http_response_header[0], '200') === false) {
-            http_response_code(500);
-            error_log('Request failed: ' . $response);
-        }
+        echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
     }
 
     public function reply_text($replyToken,$text=''){
