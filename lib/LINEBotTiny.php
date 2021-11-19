@@ -72,7 +72,7 @@ class LINEBotTiny
     }
 
     public function reply_text_to($user_id,$text=''){
-        $this->replyMessage(array(
+        $this->toyMessage(array(
             'to' => $user_id,
             'messages' => array(
                 array(
@@ -81,6 +81,27 @@ class LINEBotTiny
                 ),
             )
         ));
+    }
+    public function toyMessage($message)
+    {
+        $header = array(
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $this->channelAccessToken,
+        );
+
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => implode("\r\n", $header),
+                'content' => json_encode($message),
+            ],
+        ]);
+
+        $response = file_get_contents('https://api.line.me/v2/bot/message/push', false, $context);
+        if (strpos($http_response_header[0], '200') === false) {
+            http_response_code(500);
+            error_log('Request failed: ' . $response);
+        }
     }
 
     public function reply_text($replyToken,$text=''){
