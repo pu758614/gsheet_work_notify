@@ -18,6 +18,7 @@ foreach ($client->parseEvents() as $event) {
 
     $line_uuid = $event['source']['userId'];
     $user_data = $db->getSingleById('sheet_notify_user','line_user_uuid',$line_uuid);
+    error_log("AAAtest  userId:". $line_uuid,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     if(empty($user_data)){
         $profile = $client->getGuestInfo($line_uuid);
         $user_id = $db->insertData('sheet_notify_user',array(
@@ -26,9 +27,12 @@ foreach ($client->parseEvents() as $event) {
             'modify_time'    => date('Y-m-d H:i:s'),
             'create_time'    => date('Y-m-d H:i:s'),
         ));
+        error_log("BBBtest  userId:". $user_id,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
         $user_data = $db->getSingleById('sheet_notify_user','id',$user_id);
     }else{
         $user_id = $user_data['id'];
+        error_log("CCCtest  userId:". $user_id,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 
     switch ($event['type']) {
