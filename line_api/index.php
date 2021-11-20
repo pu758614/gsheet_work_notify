@@ -55,39 +55,53 @@ foreach ($client->parseEvents() as $event) {
                 '5' => "五",
                 '6' => "六",
             );
-            if(count($str_arr)==2 && $action=='set'){
-                $update_data = array(
-                    "modify_time" => date('Y-m-d H:i:s')
-                );
-                if(isset($change_week_day_cn_conf[$val])){
-                    $update_data['notify_day'] = $val;
-                    $msg = "您的提醒時間為每週".$change_week_day_cn_conf[$val];
-                }else if($val=='on'){
-                    $update_data['enable_notify'] = 1;
-                    $msg = "已經啟動提醒，提醒時間為每週".$change_week_day_cn_conf[$user_data['notify_day']];
-                }else if($val=='off'){
-                    $update_data['enable_notify'] = 0;
-                    $msg = "已經關閉提醒";
+            $update_data = array(
+                "modify_time" => date('Y-m-d H:i:s')
+            );
+            if(count($str_arr)==2 && $action=='set' && isset($change_week_day_cn_conf[$val]){
+                $update_data['notify_day'] = $val;
+                $msg = "您的提醒時間為每週".$change_week_day_cn_conf[$val];
+            }
+
+            if($message['text']=='on'){
+                $update_data['enable_notify'] = 1;
+                $msg = "已經啟動提醒，提醒時間為每週".$change_week_day_cn_conf[$user_data['notify_day']];
+            }else if($message['text']=='off'){
+                $update_data['enable_notify'] = 0;
+                $msg = "已經關閉提醒";
+            }
+
+
+            if(count($update_data)>=2){
+                $result = $db->updateData("sheet_notify_user",$update_data,array("id"=>$user_id));
+                $send_msg = '';
+                if($result){
+                    $send_msg = "設定成功，".$msg."。";
+                }else{
+                    $send_msg = "設定失敗。";
                 }
-                if(count($update_data)>=2){
-                    $result = $db->updateData("sheet_notify_user",$update_data,array("id"=>$user_id));
-                    $send_msg = '';
-                    if($result){
-                        $send_msg = "設定成功，".$msg."。";
-                    }else{
-                        $send_msg = "設定失敗。";
-                    }
-                    $result = $client->reply_text($event['replyToken'],$send_msg);
-                    $db->insertData("sheet_notify_notify_log",array(
-                        "line_user_uuid" => $user_data['line_user_uuid'],
-                        "type"           => "set",
-                        "real_name"      => $user_data['real_name'],
-                        "msg"            => $send_msg,
-                        "response"       => $result['msg'],
-                        "status"         => $result['status'],
-                        "create_time"    => date('Y-m-d H:i:s')
-                    ));
-                }
+                $result = $client->reply_text($event['replyToken'],$send_msg);
+                $db->insertData("sheet_notify_notify_log",array(
+                    "line_user_uuid" => $user_data['line_user_uuid'],
+                    "type"           => "set",
+                    "real_name"      => $user_data['real_name'],
+                    "msg"            => $send_msg,
+                    "response"       => $result['msg'],
+                    "status"         => $result['status'],
+                    "create_time"    => date('Y-m-d H:i:s')
+                ));
+            }else{
+                $send_msg = "錯誤的指令，可以輸入「?」來查看指令說明。";
+                $result = $client->reply_text($event['replyToken'],$send_msg);
+                $db->insertData("sheet_notify_notify_log",array(
+                    "line_user_uuid" => $user_data['line_user_uuid'],
+                    "type"           => "set",
+                    "real_name"      => $user_data['real_name'],
+                    "msg"            => $send_msg,
+                    "response"       => $result['msg'],
+                    "status"         => $result['status'],
+                    "create_time"    => date('Y-m-d H:i:s')
+                ));
             }
 
             if($message['text']=='三民聖教會'){
