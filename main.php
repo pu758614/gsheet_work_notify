@@ -93,6 +93,7 @@
         $result = $client->toyMessage($user_data['line_user_uuid'],$msg);
         $db->insertData("sheet_notify_notify_log",array(
             "line_user_uuid" => $user_data['line_user_uuid'],
+            "type"           => "notify",
             "real_name"      => $user_name,
             "msg"            => $msg,
             "response"       => $result['msg'],

@@ -101,7 +101,7 @@ class LINEBotTiny
 
 
     public function reply_text($replyToken,$text=''){
-        $this->replyMessage(array(
+        return $this->replyMessage(array(
             'replyToken' => $replyToken,
             'messages' => array(
                 array(
@@ -126,8 +126,7 @@ class LINEBotTiny
     }
 
 
-    public function replyMessage($message)
-    {
+    public function replyMessage($message){
         $header = array(
             'Content-Type: application/json',
             'Authorization: Bearer ' . $this->channelAccessToken,
@@ -142,13 +141,17 @@ class LINEBotTiny
         ]);
 
         $response = file_get_contents('https://api.line.me/v2/bot/message/reply', false, $context);
-
+        $status_code = "200";
         if (strpos($http_response_header[0], '200') === false) {
             http_response_code(500);
             error_log('Request failed: ' . $response);
+            $status_code = $http_response_header[0];
         }
-        error_log('XDDDDD: ' . json_encode($http_response_header,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-        error_log('666666666: ' . json_encode($response,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        return array(
+            "status" => $status_code,
+            "msg"    => $response,
+        );
+
     }
 
     function getGuestInfo($user_id){

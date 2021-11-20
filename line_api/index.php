@@ -43,8 +43,6 @@ foreach ($client->parseEvents() as $event) {
                     $str     = convertStrType($str);
                     $str     = str_replace(' ','',$str);
                     $str_arr = explode(":",$str);
-
-
                     $action  = isset($str_arr[0])?$str_arr[0]:'';
                     $val     = isset($str_arr[1])?$str_arr[1]:'';
                     $change_week_day_cn_conf = array(
@@ -78,9 +76,17 @@ foreach ($client->parseEvents() as $event) {
                             }else{
                                 $send_msg = "設定失敗";
                             }
-                            $client->reply_text($event['replyToken'],$send_msg);
+                            $result = $client->reply_text($event['replyToken'],$send_msg);
+                            $db->insertData("sheet_notify_notify_log",array(
+                                "line_user_uuid" => $user_data['line_user_uuid'],
+                                "type"           => "set",
+                                "real_name"      => $user_data['real_name'],
+                                "msg"            => $send_msg,
+                                "response"       => $result['msg'],
+                                "status"         => $result['status'],
+                                "create_time"    => date('Y-m-d H:i:s')
+                            ));
                         }
-
                     }
 
                     if($message['text']=='三民聖教會'){
