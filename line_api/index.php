@@ -39,6 +39,9 @@ foreach ($client->parseEvents() as $event) {
             if($message['type']!='text'){
                 continue;
             }
+            if($message['text']=='?' || $message['text']=='？'){
+                continue;
+            }
             $str     = $message['text'];
             $str     = strtolower($str);
             $str     = convertStrType($str);
@@ -58,7 +61,7 @@ foreach ($client->parseEvents() as $event) {
             $update_data = array(
                 "modify_time" => date('Y-m-d H:i:s')
             );
-            if(count($str_arr)==2 && $action=='set' && isset($change_week_day_cn_conf[$val]){
+            if(count($str_arr)==2 && $action=='set' && isset($change_week_day_cn_conf[$val])){
                 $update_data['notify_day'] = $val;
                 $msg = "您的提醒時間為每週".$change_week_day_cn_conf[$val];
             }
@@ -70,7 +73,6 @@ foreach ($client->parseEvents() as $event) {
                 $update_data['enable_notify'] = 0;
                 $msg = "已經關閉提醒";
             }
-
 
             if(count($update_data)>=2){
                 $result = $db->updateData("sheet_notify_user",$update_data,array("id"=>$user_id));
