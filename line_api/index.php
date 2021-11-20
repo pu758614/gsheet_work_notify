@@ -46,7 +46,7 @@ foreach ($client->parseEvents() as $event) {
             $text     = strtolower($text);
             $text     = convertStrType($text);
             $text     = str_replace(' ','',$text);
-            $str_arr = explode(":",$str);
+            $str_arr = explode(":",$text);
             $action  = isset($str_arr[0])?$str_arr[0]:'';
             $val     = isset($str_arr[1])?$str_arr[1]:'';
             $change_week_day_cn_conf = array(
