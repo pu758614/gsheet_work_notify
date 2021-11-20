@@ -34,7 +34,7 @@ foreach ($client->parseEvents() as $event) {
     switch ($event['type']) {
         case 'message':
             $message = $event['message'];
-            error_log('XDDDDD: ' . $message['text']);
+
             switch ($message['type']) {
                 case 'text':
 

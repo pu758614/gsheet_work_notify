@@ -142,13 +142,13 @@ class LINEBotTiny
         ]);
 
         $response = file_get_contents('https://api.line.me/v2/bot/message/reply', false, $context);
-        echo '<pre>';
-        print_r($response);
-        echo '</pre>';
+
         if (strpos($http_response_header[0], '200') === false) {
             http_response_code(500);
             error_log('Request failed: ' . $response);
         }
+        error_log('XDDDDD: ' . json_encode($http_response_header,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        error_log('666666666: ' . json_encode($response,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
     function getGuestInfo($user_id){
