@@ -50,7 +50,7 @@
 
 
 
-    $now_day = isset($day_conf[$now_day])?$day_conf[$now_day]:$day_cn_conf[date("l")];
+    $now_day = isset($day_conf[$now_day])?$now_day:$day_cn_conf[date("l")];
 
     $user_item_list = array();
     foreach ($nex_data as $key => $name) {
