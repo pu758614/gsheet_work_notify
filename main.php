@@ -7,8 +7,8 @@
         $dotenv->load();
     }
     $db = new db_lib();
-    $spreadsheet_id = isset($_ENV['SPREADSHEET_ID'])?$_ENV['SPREADSHEET_ID']:'';
-    $now_day        = isset($_ENV['NOW_DAY'])?$_ENV['NOW_DAY']:'';
+    $spreadsheet_id       = isset($_ENV['SPREADSHEET_ID'])?$_ENV['SPREADSHEET_ID']:'';
+    $now_day              = isset($_ENV['NOW_DAY'])?$_ENV['NOW_DAY']:'';
     $channel_access_token = isset($_ENV['CHANNEL_ACCESS_TOKEN'])?$_ENV['CHANNEL_ACCESS_TOKEN']:'';
     $channel_secret       = isset($_ENV['CHANNEL_SECRET'])?$_ENV['CHANNEL_SECRET']:'';
 
@@ -51,7 +51,7 @@
 
 
     $now_day = isset($day_conf[$now_day])?$now_day:$day_cn_conf[date("l")];
-
+    echo $now_day;
     $user_item_list = array();
     foreach ($nex_data as $key => $name) {
         switch ($key) {
