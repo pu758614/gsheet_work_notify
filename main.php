@@ -98,5 +98,6 @@
             "msg"            => $msg,
             "response"       => $result['msg'],
             "status"         => $result['status'],
+            "create_time"    => date('Y-m-d H:i:s')
         ));
     }
