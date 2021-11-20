@@ -10,12 +10,6 @@ if (file_exists(__DIR__ . '/.env')) {
 }
 
 
-echo '<pre>';
-print_r($str);
-echo '</pre>';
-exit;
-
-
 $channel_access_token = isset($_ENV['CHANNEL_ACCESS_TOKEN'])?$_ENV['CHANNEL_ACCESS_TOKEN']:'';
 $channel_secret       = isset($_ENV['CHANNEL_SECRET'])?$_ENV['CHANNEL_SECRET']:'';
 $db = new db_lib();
