@@ -18,25 +18,21 @@ foreach ($client->parseEvents() as $event) {
 
     $line_uuid = $event['source']['userId'];
     $user_data = $db->getSingleById('sheet_notify_user','line_user_uuid',$line_uuid);
-    error_log("AAAtest  userId:". $line_uuid,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     if(empty($user_data)){
         $profile = $client->getGuestInfo($line_uuid);
         $line_name = isset($profile['displayName'])?$profile['displayName']:'';
         $user_id = $db->insertData('sheet_notify_user',array(
             'line_user_uuid' => $line_uuid,
-            'real_name'      => $line_name,
+            'real_name'      => $line_name."123",
             'line_name'      => $line_name,
             'modify_time'    => date('Y-m-d H:i:s'),
             'create_time'    => date('Y-m-d H:i:s'),
         ));
-        error_log("BBBtest  userId:". $user_id,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         $user_data = $db->getSingleById('sheet_notify_user','id',$user_id);
     }else{
         $user_id = $user_data['id'];
-        error_log("CCCtest  userId:". $user_id,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
-    error_log('Unsupported event type: ' . $event['type']);
     switch ($event['type']) {
         case 'message':
             $message = $event['message'];
@@ -111,8 +107,9 @@ foreach ($client->parseEvents() as $event) {
             }
             break;
         case 'unfollow':
+        case 'follow':
             $data = array(
-                "relation"=>"unfollow",
+                "relation"    => $event['type'],
                 "modify_time" => date('Y-m-d H:i:s')
             );
             $db->updateData("sheet_notify_user",$data,array("id"=>$user_id));
