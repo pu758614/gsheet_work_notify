@@ -97,7 +97,7 @@ foreach ($client->parseEvents() as $event) {
                 $result = $client->reply_text($event['replyToken'],$send_msg);
                 $db->insertData("sheet_notify_notify_log",array(
                     "line_user_uuid" => $user_data['line_user_uuid'],
-                    "type"           => "set",
+                    "type"           => "error",
                     "real_name"      => $user_data['real_name'],
                     "msg"            => $send_msg,
                     "response"       => $result['msg'],
