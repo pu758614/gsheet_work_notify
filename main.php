@@ -13,7 +13,7 @@
     $channel_secret       = isset($_ENV['CHANNEL_SECRET'])?$_ENV['CHANNEL_SECRET']:'';
 
     $client = new LINEBotTiny($channel_access_token, $channel_secret);
-    $client->toyMessage('Ubdea301f314d01c74045b234820eacde','測試排程'.date('Y-m-d H:i:s'));
+
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
     $next_day = date("m/d",strtotime("next Saturday"));
     $nex_data = array();
@@ -85,8 +85,10 @@
         }
         $items_str = implode('、',$items);
         $msg = $user_name."平安  這週有".$items_str."的服事。";
-        echo $msg;
-        $notify_result = $db->notifyAction($user_data['line_user_uuid'],$msg);
+        $result = $client->toyMessage($user_data['line_user_uuid'],$msg);
+        echo '<pre>';
+        print_r($result);
+        echo '</pre>';
     }
 
 

@@ -91,6 +91,10 @@ class LINEBotTiny
         if ($response->getHTTPStatus() !='200') {
             error_log('Request failed: '. $response->getHTTPStatus() . ' ' . $response->getRawBody());
         }
+        return array(
+            "status" => $response->getHTTPStatus(),
+            "msg" => $response->getRawBody(),
+        );
     }
 
 
