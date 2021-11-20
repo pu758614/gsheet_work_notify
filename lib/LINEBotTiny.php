@@ -89,7 +89,7 @@ class LINEBotTiny
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
         $response = $bot->pushMessage($user_id, $textMessageBuilder);
         if ($response->getHTTPStatus() !='200') {
-            error_log('Request failed: '. $response->getHTTPStatus() . ' ' . $response->getRawBody();
+            error_log('Request failed: '. $response->getHTTPStatus() . ' ' . $response->getRawBody());
         }
     }
 
@@ -107,7 +107,6 @@ class LINEBotTiny
             )
         ));
     }
-
     public function reply_text_arr($replyToken,$text_arr = array()){
         $count = 0;
         foreach ($text_arr as $key => $text) {
