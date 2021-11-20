@@ -18,13 +18,6 @@
             $this->db->SetFetchMode(ADODB_FETCH_ASSOC);
         }
 
-        function notifyAction($uuid,$msg){
-            return array(
-                'error' => false,
-                'msg' => ' '
-            );
-        }
-
         function getGoogleSheet($id){
             // 建立 Google Client
             $client = new \Google_Client();
