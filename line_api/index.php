@@ -105,22 +105,6 @@ foreach ($client->parseEvents() as $event) {
                     "create_time"    => date('Y-m-d H:i:s')
                 ));
             }
-
-            if($message['text']=='三民聖教會'){
-                $client->replyMessage([
-                    'replyToken' => $event['replyToken'],
-                    'messages' => [
-                        [
-                            "type"=>"location",
-                            "title"=>"灣告輝底家啦！！",
-                            "address"=>"813左營區重立路61號",
-                            "latitude"=>'22.673217',
-                            "longitude"=>'120.313176'
-                        ]
-                    ]
-                ]);
-                break;
-            }
             break;
         case 'unfollow':
         case 'follow':
