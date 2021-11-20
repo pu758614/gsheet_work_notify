@@ -34,7 +34,7 @@ foreach ($client->parseEvents() as $event) {
         $user_id = $user_data['id'];
         error_log("CCCtest  userId:". $user_id,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
-
+    error_log('Unsupported event type: ' . $event['type']);
     switch ($event['type']) {
         case 'message':
             $message = $event['message'];
