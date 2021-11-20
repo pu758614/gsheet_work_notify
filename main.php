@@ -48,10 +48,7 @@
         "Saturday"  => '6',
     );
 
-
-    echo "1 now_day:".$now_day;
     $now_day = isset($day_conf[$now_day])?$now_day:$day_cn_conf[date("l")];
-    echo "\n2 now_day:".$now_day;
     $user_item_list = array();
     foreach ($nex_data as $key => $name) {
         switch ($key) {
@@ -101,7 +98,7 @@
             continue;
         }
         $items_str = implode('、',$items);
-        $msg = $user_name."平安  這週有".$items_str."的服事。";
+        $msg = $user_name."平安  您這週六有".$items_str."的服事，請預備心服事，願神祝福您`。`".emoji("011");
         $result = $client->toyMessage($user_data['line_user_uuid'],$msg);
         $db->insertData("sheet_notify_notify_log",array(
             "line_user_uuid" => $user_data['line_user_uuid'],
@@ -112,4 +109,10 @@
             "status"         => $result['status'],
             "create_time"    => date('Y-m-d H:i:s')
         ));
+    }
+
+    function emoji($code){
+        $bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
+        $emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
+        return $emoticon;
     }
