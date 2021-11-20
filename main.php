@@ -38,7 +38,19 @@
         '5' => "Friday",
         '6' => "Saturday",
     );
-    $now_day = isset($day_conf[$now_day])?$day_conf[$now_day]:date("l");
+    $day_cn_conf = array(
+        "Sunday"    => '0',
+        "Monday"    => '1',
+        "Tuesday"   => '2',
+        "Wednesday" => '3',
+        "Thursday"  => '4',
+        "Friday"    => '5',
+        "Saturday"  => '6',
+    );
+
+
+
+    $now_day = isset($day_conf[$now_day])?$day_conf[$now_day]:$day_cn_conf[date("l")];
 
     $user_item_list = array();
     foreach ($nex_data as $key => $name) {
