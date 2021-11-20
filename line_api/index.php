@@ -23,6 +23,7 @@ foreach ($client->parseEvents() as $event) {
         $profile = $client->getGuestInfo($line_uuid);
         $user_id = $db->insertData('sheet_notify_user',array(
             'line_user_uuid' => $line_uuid,
+            'real_name'      => isset($profile['displayName'])?$profile['displayName']:'',
             'line_name'      => isset($profile['displayName'])?$profile['displayName']:'',
             'modify_time'    => date('Y-m-d H:i:s'),
             'create_time'    => date('Y-m-d H:i:s'),
@@ -107,6 +108,13 @@ foreach ($client->parseEvents() as $event) {
                 ]);
                 break;
             }
+            break;
+        case 'unfollow':
+            $data = array(
+                "relation"=>"unfollow",
+                "modify_time" => date('Y-m-d H:i:s')
+            );
+            $db->updateData("sheet_notify_user",$data,array("id"=>$user_id));
             break;
         default:
             error_log('Unsupported event type: ' . $event['type']);
