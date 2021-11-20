@@ -53,7 +53,6 @@
                 $response = $service->spreadsheets_values->get($id, $getRange);
                 $data = $response->getValues();
             } catch (Exception $e) {
-                print json_encode($e->getMessage(),JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
                 error_log("get sheet error.id: $id response:".$e->getMessage(),JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             }
             return $data;
