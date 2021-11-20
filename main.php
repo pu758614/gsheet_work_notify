@@ -82,8 +82,9 @@
     foreach ($user_item_list as $user_name => $items) {
 
         $user_data = $db->getSingleByArray('sheet_notify_user',array(
-            'real_name'  => $user_name,
-            'notify_day' => $now_day
+            'real_name'     => $user_name,
+            'notify_day'    => $now_day,
+            'enable_notify' => 1
         ));
         if(empty($user_data)){
             continue;
@@ -91,4 +92,11 @@
         $items_str = implode('、',$items);
         $msg = $user_name."平安  這週有".$items_str."的服事。";
         $result = $client->toyMessage($user_data['line_user_uuid'],$msg);
+        $db->insertData("sheet_notify_notify_log",array(
+            "line_user_uuid" => $user_data['line_user_uuid'],
+            "real_name"      => $user_name,
+            "msg"            => $msg,
+            "response"       => $result['msg'],
+            "status"         => $result['status'],
+        ));
     }
