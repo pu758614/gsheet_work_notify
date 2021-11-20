@@ -42,10 +42,10 @@ foreach ($client->parseEvents() as $event) {
             if($message['text']=='?' || $message['text']=='？'){
                 continue;
             }
-            $str     = $message['text'];
-            $str     = strtolower($str);
-            $str     = convertStrType($str);
-            $str     = str_replace(' ','',$str);
+            $text    = $message['text'];
+            $text     = strtolower($text);
+            $text     = convertStrType($text);
+            $text     = str_replace(' ','',$text);
             $str_arr = explode(":",$str);
             $action  = isset($str_arr[0])?$str_arr[0]:'';
             $val     = isset($str_arr[1])?$str_arr[1]:'';
@@ -66,10 +66,10 @@ foreach ($client->parseEvents() as $event) {
                 $msg = "您的提醒時間為每週".$change_week_day_cn_conf[$val];
             }
 
-            if($message['text']=='on'){
+            if($text=='on'){
                 $update_data['enable_notify'] = 1;
                 $msg = "已經啟動提醒，提醒時間為每週".$change_week_day_cn_conf[$user_data['notify_day']];
-            }else if($message['text']=='off'){
+            }else if($text=='off'){
                 $update_data['enable_notify'] = 0;
                 $msg = "已經關閉提醒";
             }
