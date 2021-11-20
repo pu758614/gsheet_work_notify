@@ -20,7 +20,6 @@
     }else{
         $next_day = date("m/d");
     }
-    echo $next_day;
     $nex_data = array();
     foreach ($list_data as $key => $data) {
         if($key==0 && $key==1){
