@@ -91,7 +91,4 @@
         $items_str = implode('、',$items);
         $msg = $user_name."平安  這週有".$items_str."的服事。";
         $result = $client->toyMessage($user_data['line_user_uuid'],$msg);
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';
     }
