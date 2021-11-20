@@ -23,7 +23,7 @@ foreach ($client->parseEvents() as $event) {
         $line_name = isset($profile['displayName'])?$profile['displayName']:'';
         $user_id = $db->insertData('sheet_notify_user',array(
             'line_user_uuid' => $line_uuid,
-            'real_name'      => $line_name."123",
+            'real_name'      => $line_name,
             'line_name'      => $line_name,
             'modify_time'    => date('Y-m-d H:i:s'),
             'create_time'    => date('Y-m-d H:i:s'),
