@@ -65,7 +65,7 @@ foreach ($client->parseEvents() as $event) {
                         '5' => "五",
                         '6' => "六",
                     );
-                    if(count($str_arr)!=2 && $action=='set'){
+                    if(count($str_arr)==2 && $action=='set'){
                         $update_data = array(
                             "modify_time" => date('Y-m-d H:i:s')
                         );
