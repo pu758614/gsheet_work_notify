@@ -47,15 +47,6 @@ foreach ($client->parseEvents() as $event) {
 
                     $action  = isset($str_arr[0])?$str_arr[0]:'';
                     $val     = isset($str_arr[1])?$str_arr[1]:'';
-                    $change_week_day_conf = array(
-                        '0' => "Sunday",
-                        '1' => "Monday",
-                        '2' => "Tuesday",
-                        '3' => "Wednesday",
-                        '4' => "Thursday",
-                        '5' => "Friday",
-                        '6' => "Saturday",
-                    );
                     $change_week_day_cn_conf = array(
                         '0' => "日",
                         '1' => "一",
@@ -69,7 +60,7 @@ foreach ($client->parseEvents() as $event) {
                         $update_data = array(
                             "modify_time" => date('Y-m-d H:i:s')
                         );
-                        if(isset($change_week_day_conf[$val])){
+                        if(isset($change_week_day_cn_conf[$val])){
                             $update_data['notify_day'] = $val;
                             $msg = "您的提醒時間為每週".$change_week_day_cn_conf[$val];
                         }else if($val=='on'){
