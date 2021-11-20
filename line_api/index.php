@@ -70,7 +70,7 @@ foreach ($client->parseEvents() as $event) {
                             "modify_time" => date('Y-m-d H:i:s')
                         );
                         if(isset($change_week_day_conf[$val])){
-                            $update_data['notify_day'] = $change_week_day_conf[$val];
+                            $update_data['notify_day'] = $val;
                             $msg = "您的提醒時間為每週".$change_week_day_cn_conf[$val];
                         }else if($val=='on'){
                             $update_data['enable_notify'] = 1;
