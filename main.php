@@ -20,7 +20,7 @@
     }else{
         $next_day = date("m/d");
     }
-
+    echo $next_day;
     $nex_data = array();
     foreach ($list_data as $key => $data) {
         if($key==0 && $key==1){
@@ -90,11 +90,8 @@
         }
         $items_str = implode('、',$items);
         $msg = $user_name."平安  這週有".$items_str."的服事。";
-        $result = $client->toyMessage($user_data['line_user_uuid'],$msg);
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';
+        // $result = $client->toyMessage($user_data['line_user_uuid'],$msg);
+        // echo '<pre>';
+        // print_r($result);
+        // echo '</pre>';
     }
-
-
-    print_r($user_item_list);
