@@ -49,9 +49,9 @@
     );
 
 
-
+    echo "1 now_day:".$now_day;
     $now_day = isset($day_conf[$now_day])?$now_day:$day_cn_conf[date("l")];
-    echo $now_day;
+    echo "\n2 now_day:".$now_day;
     $user_item_list = array();
     foreach ($nex_data as $key => $name) {
         switch ($key) {
