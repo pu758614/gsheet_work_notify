@@ -17,9 +17,9 @@
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
 
     if(date("l")!='Saturday'){
-        $next_day = date("m/d",strtotime("next Saturday"));
+        $next_day = date("n/j",strtotime("next Saturday"));
     }else{
-        $next_day = date("m/d");
+        $next_day = date("n/j");
     }
     $nex_data = array();
     foreach ($list_data as $key => $data) {
