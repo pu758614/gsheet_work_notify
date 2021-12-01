@@ -30,11 +30,6 @@
             $nex_data = $data;
         }
     }
-    echo $next_day;
-    echo '<pre>';
-    print_r($nex_data);
-    echo '</pre>';
-    exit;
     $day_conf = array(
         '0' => "Sunday",
         '1' => "Monday",
