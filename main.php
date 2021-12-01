@@ -15,6 +15,9 @@
     $client = new LINEBotTiny($channel_access_token, $channel_secret);
 
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
+    echo '<pre>';
+    print_r($list_data);
+    echo '</pre>';
     if(date("l")!='Saturday'){
         $next_day = date("m/d",strtotime("next Saturday"));
     }else{
