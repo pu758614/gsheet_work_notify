@@ -30,6 +30,7 @@
             $nex_data = $data;
         }
     }
+    echo $next_day;
     echo '<pre>';
     print_r($nex_data);
     echo '</pre>';
