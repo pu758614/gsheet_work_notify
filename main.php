@@ -15,9 +15,7 @@
     $client = new LINEBotTiny($channel_access_token, $channel_secret);
 
     $list_data      = $db->getGoogleSheet($spreadsheet_id);
-    echo '<pre>';
-    print_r($list_data);
-    echo '</pre>';
+
     if(date("l")!='Saturday'){
         $next_day = date("m/d",strtotime("next Saturday"));
     }else{
@@ -32,6 +30,10 @@
             $nex_data = $data;
         }
     }
+    echo '<pre>';
+    print_r($nex_data);
+    echo '</pre>';
+    exit;
     $day_conf = array(
         '0' => "Sunday",
         '1' => "Monday",
@@ -90,6 +92,8 @@
                 break;
         }
     }
+
+
     foreach ($user_item_list as $user_name => $items) {
 
         $user_data = $db->getSingleByArray('sheet_notify_user',array(
