@@ -31,8 +31,6 @@
             $content_php_file = 'system_set';
             break;
     }
-    echo $action."<br>";
-    echo $content_php_file;
 
 
     $include_tpl = array(
