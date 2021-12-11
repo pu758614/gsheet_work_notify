@@ -43,7 +43,7 @@ Trait DB_CRUD {
         $arr_prestr = array($value);
         $sql = "SELECT * FROM $table WHERE $key=? $order_by";
         $result = $this->db->Execute($sql,$arr_prestr);
-        if($result && $result->RecordCount() > 0){
+        if($result){
             return $result->getAll();
         }else{
             return array();
