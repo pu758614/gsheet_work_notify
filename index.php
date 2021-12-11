@@ -10,8 +10,7 @@
     session_start();
 
     $is_login = isset($_SESSION['login'])?$_SESSION['login']:false;
-    echo $is_login;
-    exit;
+
     if(!$is_login){
         $include_tpl = array(
             "content_page" => "tpl/login.tpl",
@@ -32,8 +31,8 @@
             $content_php_file = 'system_set';
             break;
     }
-
-
+    echo $action."<br>";
+    echo $content_php_file;
 
 
     $include_tpl = array(
