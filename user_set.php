@@ -1,7 +1,9 @@
 <?php
-    echo 'aaaaa';
-    // $user_list = $db->getUserList();
 
+    $user_list = $db->getUserList();
+    echo '<pre>';
+    print_r($user_list);
+    echo '</pre>';
 
     // foreach ($user_list as $key => $user_data) {
     //     $no = $key+1;
