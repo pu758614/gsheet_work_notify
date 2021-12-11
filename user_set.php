@@ -1,10 +1,6 @@
 <?php
 
     $user_list = $db->getUserList();
-    echo '<pre>';
-    print_r($user_list);
-    echo '</pre>';
-
     foreach ($user_list as $key => $user_data) {
         $no = $key+1;
         $sheet_name_list = $db->getArrayById('sheet_notify_user_sheet_names',"user_id",$user_data['id']);
