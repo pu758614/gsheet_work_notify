@@ -635,6 +635,12 @@ class TemplatePower extends TemplatePowerParser
             $this->__assign($varname, $value);
         }
     }
+    function assignArray($data_list)
+    {
+        foreach ($data_list as $key => $value) {
+            $this->assign($key,$value);
+        }
+    }
 
     /**
      * TemplatePower::gotoBlock()

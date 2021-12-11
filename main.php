@@ -1,7 +1,7 @@
 <?php
     require 'vendor/autoload.php';
     include_once("lib/lib.php");
-    include_once("lib//LINEBotTiny.php");
+    include_once("lib/LINEBotTiny.php");
     if (file_exists(__DIR__ . '/.env')) {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
         $dotenv->load();

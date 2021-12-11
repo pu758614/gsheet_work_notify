@@ -5,10 +5,11 @@
         function __construct(){
             date_default_timezone_set('asia/taipei');
             header("Content-type: text/html; charset=utf-8");
-            if (file_exists(__DIR__ . '/.env')) {
+            if (file_exists( '.env')) {
                 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__."/..");
                 $dotenv->load();
             }
+
             $host      = isset($_ENV['DB_HOST'])?$_ENV['DB_HOST']:'';
             $user_name = isset($_ENV['DB_USER'])?$_ENV['DB_USER']:'';
             $psw       = isset($_ENV['DB_PSW'])?$_ENV['DB_PSW']:'';
@@ -49,5 +50,36 @@
                 error_log("get sheet error.id: $id response:".$e->getMessage(),JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             }
             return $data;
+        }
+
+        function getUserList(){
+            $tb = 'sheet_notify_user';
+            $where = '';
+            if($where!=''){
+                $where = 'WHERE '.$where;
+            }
+
+            $sql = "SELECT * FROM $tb  $where";
+
+            $rs =  $this->db->Execute($sql);
+
+            if($rs && $rs->RecordCount() > 0){
+                return $rs->getAll();
+            }else{
+                return array();
+            }
+        }
+
+        function checkNameExist($id,$name){
+            $tb = 'sheet_notify_user_sheet_names';
+            $sql = "SELECT user_id
+                    FROM   $tb
+                    WHERE  user_id != ? AND name=?";
+            $rs = $this->db->Execute($sql,array($id,$name));
+            if($rs && $rs->RecordCount() > 0){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
