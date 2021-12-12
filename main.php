@@ -48,52 +48,58 @@
         "Friday"    => '5',
         "Saturday"  => '6',
     );
-
+    $user_data_tmp = array();
     $now_day = isset($day_conf[$now_day])?$now_day:$day_cn_conf[date("l")];
     $user_item_list = array();
+
     foreach ($nex_data as $key => $name) {
+        $user_data = getUserInfoForName($name);
+
+        if(empty($user_data)){
+            continue;
+        }
+        $user_id = $user_data['user_id'];
         switch ($key) {
             case '1':
-                $user_item_list[$name][] = '會前禱告';
+                $user_item_list[$user_id][] = '會前禱告';
                 break;
             case '2':
-                $user_item_list[$name][] = '司會';
+                $user_item_list[$user_id][] = '司會';
                 break;
             case '3':
-                $user_item_list[$name][] = '敬拜主領';
+                $user_item_list[$user_id][] = '敬拜主領';
                 break;
             case '4':
             case '5':
-                $user_item_list[$name][] = '配唱';
+                $user_item_list[$user_id][] = '配唱';
                 break;
             case '6':
-                $user_item_list[$name][] = '司琴';
+                $user_item_list[$user_id][] = '司琴';
                 break;
             case '7':
-                $user_item_list[$name][] = '司鼓';
+                $user_item_list[$user_id][] = '司鼓';
                 break;
             case '8':
             case '9':
-                $user_item_list[$name][] = '視聽';
+                $user_item_list[$user_id][] = '視聽';
                 break;
             case '10':
             case '11':
-                $user_item_list[$name][] = '司獻';
+                $user_item_list[$user_id][] = '司獻';
                 break;
             case '14':
-                $user_item_list[$name][] = '小組破冰';
+                $user_item_list[$user_id][] = '小組破冰';
                 break;
             case '15':
-                $user_item_list[$name][] = '小組詩歌';
+                $user_item_list[$user_id][] = '小組詩歌';
                 break;
         }
     }
 
 
-    foreach ($user_item_list as $user_name => $items) {
-
+    foreach ($user_item_list as $user_id => $items) {
         $user_data = $db->getSingleByArray('sheet_notify_user',array(
-            'real_name'     => $user_name,
+            'id'     => $user_id,
             'notify_day'    => $now_day,
             'enable_notify' => 1
         ));
@@ -101,7 +107,8 @@
             continue;
         }
         $items_str = implode('、',$items);
-        $msg = $user_name." 平安\n您這週六($next_day)有".$items_str."的服事，請預備心服事，願神祝福您。".emoji("10008D");
+        $msg = $user_data['real_name']." 平安\n您這週六($next_day)有".$items_str."的服事，請預備心服事，願神祝福您。".emoji("10008D");
+
         $result = $client->toyMessage($user_data['line_user_uuid'],$msg);
         $db->insertData("sheet_notify_notify_log",array(
             "line_user_uuid" => $user_data['line_user_uuid'],
@@ -118,4 +125,15 @@
         $bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
         $emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
         return $emoticon;
+    }
+
+    function getUserInfoForName($name){
+        global $user_data_tmp,$db;
+        if(!isset($user_data_tmp[$name])){
+            $data = $db->getSingleById('sheet_notify_user_sheet_names','name',$name);
+            $user_data_tmp[$name] = $data;
+        }else{
+            $data = $user_data_tmp[$name];
+        }
+        return $data;
     }
