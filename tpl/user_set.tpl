@@ -3,10 +3,12 @@
     table td{
         vertical-align: middle;
         text-align: center;
+        font-size:16px;
     }
     table th{
         vertical-align: middle;
         text-align: center;
+        font-size:16px;
     }
 </style>
 <div class="content-box-large">
@@ -33,8 +35,8 @@
                     <th width='5%' style="vertical-align: middle;">#</th>
                     <th width='15%' style="vertical-align:middle;">line名稱</th>
                     <th width='15%'>姓名</th>
-                    <th width='50%' style="vertical-align:middle;">服事表名稱</th>
-                    <th width='10%'>動作</th>
+                    <th width='40%' style="vertical-align:middle;">服事表名稱</th>
+                    <th width='20%'>動作</th>
                 </tr>
             </thead>
             <tbody>

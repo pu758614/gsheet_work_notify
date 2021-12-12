@@ -55,7 +55,6 @@
             foreach ($name_save_list as $name_str) {
                 $data = array(
                     'name'        => $name_str,
-                    'uuid'        => '123456',
                     'user_id'     => $user_data['id'],
                     'create_time' => date('Y-m-d H:i:s')
                 );
