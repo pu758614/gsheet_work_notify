@@ -113,7 +113,7 @@
         $db->insertData("sheet_notify_notify_log",array(
             "line_user_uuid" => $user_data['line_user_uuid'],
             "type"           => "notify",
-            "real_name"      => $user_name,
+            "real_name"      => $user_data['real_name'],
             "msg"            => $msg,
             "response"       => $result['msg'],
             "status"         => $result['status'],
