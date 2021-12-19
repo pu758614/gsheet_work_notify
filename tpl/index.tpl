@@ -8,7 +8,7 @@
     <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
 
     <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- styles -->
     <link href="css/styles.css" rel="stylesheet">
 

@@ -2,9 +2,11 @@
 
     table td{
         vertical-align: middle;
+
         text-align: center;
         font-size:16px;
     }
+
     table th{
         vertical-align: middle;
         text-align: center;
@@ -36,6 +38,8 @@
                     <th width='15%' style="vertical-align:middle;">line名稱</th>
                     <th width='15%'>姓名</th>
                     <th width='40%' style="vertical-align:middle;">服事表名稱</th>
+                    <th width='10%' style="vertical-align:middle;">通知日</th>
+                    <th width='10%' style="vertical-align:middle;">狀態</th>
                     <th width='20%'>動作</th>
                 </tr>
             </thead>
@@ -47,6 +51,17 @@
                     <td class='{uuid}_view'>{name}</td>
                     <td class='{uuid}_view' id='{uuid}_sheet_name'>
                         {sheet_names}
+                    </td>
+                    <td class='{uuid}_view' id='{uuid}_notify_date'>
+                        {notify_day}
+                    </td>
+
+                    <td class='{uuid}_view' id='{uuid}_status'>
+                        {status}
+                    </td>
+                    <td class='{uuid}_view'>
+                        <button class="btn btn-primary edit_but" onclick="edit_text('{uuid}')"><i
+                                class="glyphicon glyphicon-pencil"></i> 編輯</button>
                     </td>
                     <td class='{uuid}_edit' style="display: none;">
                         <div class="col-sm-16">
@@ -60,16 +75,42 @@
                                 placeholder="">
                         </div>
                     </td>
-
-                    <td class='{uuid}_view'>
-                        <button class="btn btn-primary edit_but" onclick="edit_text('{uuid}')"><i
-                                class="glyphicon glyphicon-pencil"></i> 編輯</button>
+                    <td class='{uuid}_edit'  style="display: none;" >
+                        <div class="col-sm-16" >
+                            <select name="" id="{uuid}_notify_day" id=>
+                                <option value="0" {notify_day_0}>週日</option>
+                                <option value="1" {notify_day_1}>週一</option>
+                                <option value="2" {notify_day_2}>週二</option>
+                                <option value="3" {notify_day_3}>週三</option>
+                                <option value="4" {notify_day_4}>週四</option>
+                                <option value="5" {notify_day_5}>週五</option>
+                                <option value="6" {notify_day_6}>週六</option>
+                            </select>
+                        </div>
                     </td>
                     <td class='{uuid}_edit' style="display: none;">
-                        <button class="btn btn-info" onclick="save_text('{uuid}')"><i
+                        <div class="col-sm-16">
+                            <div>
+                                <input type="radio" name="{uuid}_enable_notify" id="" value="1" {enable_notify_1}>啟動<p></p>
+                            </div>
+                            <div>
+                                <input type="radio" name="enable_notify_{uuid}" id="" value="0" {enable_notify_0}>關閉
+                            </div>
+
+                        </div>
+                    </td>
+
+
+                    <td class='{uuid}_edit' style="display: none;">
+                        <div>
+                            <button class="btn btn-info" onclick="save_text('{uuid}')"><i
                                 class="glyphicon glyphicon-save"></i> 儲存</button>
-                        <button class="btn btn-danger" onclick="close_text('{uuid}')"><i
+                        </div><p>
+                        <div>
+                            <button class="btn btn-danger" onclick="close_text('{uuid}')"><i
                                 class="glyphicon glyphicon-remove"></i> 關閉</button>
+                        </div>
+
                     </td>
                 </tr>
                 <!-- END BLOCK : user_list -->
