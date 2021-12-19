@@ -5,9 +5,7 @@
         "sheet_code",
     );
     $c = $db->getConfigValue('sheet_code');
-    echo '<pre>';
-    print_r($c);
-    echo '</pre>';
+
     $assign_list = array();
     foreach ($conf_list as  $conf_key) {
         $data = $db->getSingleById('sheet_notify_config',"item",$conf_key);
