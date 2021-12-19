@@ -26,8 +26,10 @@
             }
             break;
         case 'save_text':
-            $uuid = isset($_POST['uuid'])?$_POST['uuid']:'';
-            $text = isset($_POST['text'])?$_POST['text']:'';
+            $uuid       = isset($_POST['uuid'])?$_POST['uuid']:'';
+            $text       = isset($_POST['text'])?$_POST['text']:'';
+            $notify_day = isset($_POST['notify_day'])?$_POST['notify_day']:0;
+            $status     = isset($_POST['status'])?$_POST['status']:0;
             $text = convertStrType($text);
             $text = trim($text);
             $text = str_replace(array('.',','),',',$text);
@@ -60,16 +62,16 @@
                 );
                 $name_arr[] = $name_str;
                 $db->insertData('sheet_notify_user_sheet_names',$data);
-
             }
-
+            $db->updateData('sheet_notify_user',array(
+                'notify_day'    => $notify_day ,
+                'enable_notify' => $status,
+                'modify_time'   => date('Y-m-d H:i:s')
+            ),array('line_user_uuid'=>$uuid));
             $result['error'] = false;
             $result['data'] = implode('.',$name_arr);
             break;
 
-        default:
-            # code...
-            break;
     }
 
 

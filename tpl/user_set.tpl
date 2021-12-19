@@ -94,7 +94,7 @@
                                 <input type="radio" name="{uuid}_enable_notify" id="" value="1" {enable_notify_1}>啟動<p></p>
                             </div>
                             <div>
-                                <input type="radio" name="enable_notify_{uuid}" id="" value="0" {enable_notify_0}>關閉
+                                <input type="radio" name="{uuid}_enable_notify" id="" value="0" {enable_notify_0}>關閉
                             </div>
 
                         </div>
@@ -131,6 +131,7 @@
     }
 
     function save_text(uuid) {
+        let status = $("input[name="+uuid+"_enable_notify]:checked").val();
         $.ajax({
             url: 'gsheet_work_notify_action.php?action=save_text',
             type: 'POST',
@@ -138,19 +139,28 @@
             async: false,
             data: {
                 uuid: uuid,
-                text: $("#" + uuid + "_text").val()
+                text: $("#" + uuid + "_text").val(),
+                notify_day:$("#" + uuid + "_notify_day").val(),
+                status:status
             },
         })
-            .done(function (result) {
-                if (result.error == false) {
-                    $("#" + uuid + "_sheet_name").text(result.data);
-                    close_text(uuid);
-                } else {
-                    alert(result.msg);
+        .done(function (result) {
+            if (result.error == false) {
+                $("#" + uuid + "_sheet_name").text(result.data);
+                let notify_day_str =  $('#'+uuid+'_notify_day :selected').text();
+                $("#"+uuid+"_notify_date").text(notify_day_str);
+                if(status==0){
+                    $("#"+uuid+"_status").text('關閉')
+                }else{
+                    $("#"+uuid+"_status").text('啟動')
                 }
-            })
-            .fail(function () {
-                alert('發生錯誤');
-            });
+                close_text(uuid);
+            } else {
+                alert(result.msg);
+            }
+        })
+        .fail(function () {
+            alert('發生錯誤');
+        });
     }
 </script>
