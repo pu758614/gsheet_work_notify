@@ -7,11 +7,11 @@
         $dotenv->load();
     }
     $db = new db_lib();
-    $spreadsheet_id       = isset($_ENV['SPREADSHEET_ID'])?$_ENV['SPREADSHEET_ID']:'';
+    //$spreadsheet_id       = isset($_ENV['SPREADSHEET_ID'])?$_ENV['SPREADSHEET_ID']:'';
     $now_day              = isset($_ENV['NOW_DAY'])?$_ENV['NOW_DAY']:'';
     $channel_access_token = isset($_ENV['CHANNEL_ACCESS_TOKEN'])?$_ENV['CHANNEL_ACCESS_TOKEN']:'';
     $channel_secret       = isset($_ENV['CHANNEL_SECRET'])?$_ENV['CHANNEL_SECRET']:'';
-
+    $spreadsheet_id       = $db->getConfigValue('sheet_code');
     $client = new LINEBotTiny($channel_access_token, $channel_secret);
 
     $list_data      = $db->getGoogleSheet($spreadsheet_id);

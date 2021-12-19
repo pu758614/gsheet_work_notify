@@ -11,12 +11,71 @@
     $db = new db_lib;
     session_start();
     switch ($action) {
+        case 'test_sheet':
+            $sheet_code = isset($_POST['sheet_code'])?$_POST['sheet_code']:'';
+            $list_data      = $db->getGoogleSheet($sheet_code);
+            if(empty($list_data)){
+                $result['msg'] = '無效的google試算表代號';
+                goto end;
+            }
+            $result['error'] = false;
+            break;
+        case 'config_setting':
+            $password   = isset($_POST['password'])?$_POST['password']:'';
+            $sheet_code = isset($_POST['sheet_code'])?$_POST['sheet_code']:'';
+            $list_data      = $db->getGoogleSheet($sheet_code);
+            if(empty($list_data)){
+                $result['msg'] = '無效的google試算表代號';
+                goto end;
+            }
+            $conf_list = array(
+                "pass_word",
+                "sheet_code",
+            );
+            $password_data = $db->getSingleById('sheet_notify_config','item','password');
+            if(empty($password_data)){
+                $re = $db->insertData('sheet_notify_config',array(
+                    'item'        => 'password',
+                    'value'       => $password,
+                    'create_time' => date('Y-m-d H:i:s'),
+                    'modify_time' => date('Y-m-d H:i:s'),
+                ));
+            }else{
+                $re = $db->updateData('sheet_notify_config',array(
+                    'value'       => $password,
+                    'modify_time' => date('Y-m-d H:i:s'),
+                ),array('id'=>$password_data['id']));
+            }
+            if(!$re){
+                $result['msg'] = '更新密碼失敗';
+                goto end;
+            }
+            $sheet_code_data = $db->getSingleById('sheet_notify_config','item','sheet_code');
+            if(empty($sheet_code_data)){
+                $re = $db->insertData('sheet_notify_config',array(
+                    'item'        => 'sheet_code',
+                    'value'       => $sheet_code,
+                    'create_time' => date('Y-m-d H:i:s'),
+                    'modify_time' => date('Y-m-d H:i:s'),
+                ));
+            }else{
+                $re = $db->updateData('sheet_notify_config',array(
+                    'value'       => $sheet_code,
+                    'modify_time' => date('Y-m-d H:i:s'),
+                ),array('id'=>$sheet_code_data['id']));
+            }
+            if(!$re){
+                $result['msg'] = '更新google試算表代號失敗';
+                goto end;
+            }
+            $result['error'] = false;
+            break;
         case 'sign_out':
             $_SESSION['login'] = false;
             $result['error'] = false;
             break;
         case 'login_system':
-            $login_name = isset($_POST['login_name'])?$_POST['login_name']:'';
+            $login_name     = isset($_POST['login_name'])?$_POST['login_name']:'';
             $login_password = isset($_POST['login_password'])?$_POST['login_password']:'';
             if($login_name=='admin' && $login_password=='123456'){
                 $_SESSION['login'] = true;

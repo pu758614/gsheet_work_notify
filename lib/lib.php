@@ -19,6 +19,13 @@
             $this->db->SetFetchMode(ADODB_FETCH_ASSOC);
         }
 
+
+        function getConfigValue($item){
+            $data = $this->getSingleById('sheet_notify_config','item',$item);
+            $value = isset($data['value'])?$data['value']:'';
+            return $value;
+        }
+
         function getGoogleSheet($id){
             // 建立 Google Client
             $client = new \Google_Client();
