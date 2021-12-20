@@ -107,7 +107,7 @@
             continue;
         }
         $items_str = implode('、',$items);
-        $msg = $user_data['real_name']." 平安\n您這週六($next_day)有".$items_str."的服事，請預備心服事，願神祝福您。".emoji("10008D");
+        $msg = $user_data['real_name']." 平安！\n您這週六($next_day)有".$items_str."的服事，請預備心服事，願神祝福您。".emoji("10008D");
 
         $result = $client->toyMessage($user_data['line_user_uuid'],$msg);
         $db->insertData("sheet_notify_notify_log",array(

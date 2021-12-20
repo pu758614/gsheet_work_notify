@@ -49,10 +49,10 @@ foreach ($client->parseEvents() as $event) {
             $text = str_replace(' ','',$text);
             switch ($text) {
                 case 'all':
-                    $spreadsheet_id       = $db->getConfigValue('sheet_code');
+                    $spreadsheet_id   = $db->getConfigValue('sheet_code');
                     $user_list_result = $db->getAllSheetUser($user_data['line_user_uuid']);
-                    $user_list = isset($user_list_result['data'])?$user_list_result['data']:array();
-                    $sheet_list  = $db->getGoogleSheet($spreadsheet_id);
+                    $user_list        = isset($user_list_result['data'])?$user_list_result['data']:array();
+                    $sheet_list       = $db->getGoogleSheet($spreadsheet_id);
                     $work_field_conf = array(
                         "1"  => "會前禱告",
                         "2"  => "司會",
@@ -84,7 +84,7 @@ foreach ($client->parseEvents() as $event) {
                        // }
                     }
 
-                    $msg = "以下是您這季接下來的服事，請預備心呦~\n";
+                    $msg = $user_data['real_name']."平安！  以下是您這季接下來的服事，請預備心呦~\n";
                     foreach ($work_list as $work_date => $work_val) {
                         $msg .= $work_date."-". implode(',',$work_val)."\n";
                     }
