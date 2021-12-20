@@ -20,6 +20,26 @@
         }
 
 
+        function getAllSheetUser($uuid){
+            $user_data = $this->getSingleById('sheet_notify_user','line_user_uuid',$uuid);
+            if(empty($user_data)){
+                return array(
+                    'error' => true,
+                    'msg' => '錯誤的user_uuid'
+                );
+            }
+            $sheet_names = $this->getArrayById('sheet_notify_user_sheet_names','user_id',$user_data['id']);
+            $name_list = array();
+            foreach ($sheet_names as $key => $sheet_name) {
+                $name_list[] = $sheet_name['name'];
+            }
+            return array(
+                'error' => false,
+                'msg'   => '錯誤的user_uuid',
+                'data'  => $name_list
+            );
+        }
+
         function getConfigValue($item){
             $data = $this->getSingleById('sheet_notify_config','item',$item);
             $value = isset($data['value'])?$data['value']:'';

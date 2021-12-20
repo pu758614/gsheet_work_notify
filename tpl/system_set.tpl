@@ -83,9 +83,9 @@
         })
         .done(function(result) {
             if( result.error==false ){
-              // window.location.reload();
+                alert('已儲存設定');
             }else{
-               // alert(result.msg);
+                alert(result.msg);
             }
         })
         .fail(function() {
