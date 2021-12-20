@@ -84,7 +84,7 @@ foreach ($client->parseEvents() as $event) {
                        // }
                     }
 
-                    $msg = '';
+                    $msg = "以下是您這季接下來的服事，請預備心呦~\n";
                     foreach ($work_list as $work_date => $work_val) {
                         $msg .= $work_date."-". implode(',',$work_val)."\n";
                     }

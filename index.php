@@ -41,8 +41,6 @@
 
 
     end:
-
-
         foreach($include_tpl as $tpl_key => $tpl_val){
             if(isset($tpl_val[0])){
                 $tpl->assignInclude( $tpl_key , $tpl_val);
