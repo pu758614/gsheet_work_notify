@@ -19,6 +19,20 @@
             $this->db->SetFetchMode(ADODB_FETCH_ASSOC);
         }
 
+        function getNotifyRecordList(){
+
+
+
+            $sql = "SELECT *
+                    FROM   sheet_notify_notify_log";
+            $rs = $this->db->Execute($sql);
+            if($rs && $rs->RecordCount() > 0){
+                return $rs->getAll();
+            }else{
+            }
+
+        }
+
 
         function getAllSheetUser($uuid){
             $user_data = $this->getSingleById('sheet_notify_user','line_user_uuid',$uuid);

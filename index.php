@@ -30,6 +30,10 @@
             $content_tpl_file = 'system_set';
             $content_php_file = 'system_set';
             break;
+        case 'notify_record':
+            $content_tpl_file = 'notify_record';
+            $content_php_file = 'notify_record';
+            break;
     }
 
 

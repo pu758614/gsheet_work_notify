@@ -2,6 +2,7 @@
     <div class="sidebar content-box" style="display: block;">
         <ul class="nav">
             <li class="current"><a href="?action=user_set"><i class="glyphicon glyphicon-list"></i>人員設定</a></li>
+            <li class="current"><a href="?action=notify_record"><i class="glyphicon glyphicon-list"></i>通知紀錄</a></li>
             <li class="current"><a href="?action=system_set"><i class="glyphicon glyphicon-list"></i>系統設定</a></li>
 
             <!-- <li class="submenu">

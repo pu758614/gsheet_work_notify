@@ -74,17 +74,17 @@ foreach ($client->parseEvents() as $event) {
                             continue;
                         }
                         $date = $sheet_data[0];
-                       // if(strtotime($sheet_data[0])>= strtotime(date('m/d'))){
+                        if(strtotime($sheet_data[0])>= strtotime(date('m/d'))){
                             foreach ($sheet_data as $sheet_key => $sheet_val) {
                                 if(in_array($sheet_val,$user_list)){
                                     $work_name = isset($work_field_conf[$sheet_key])?$work_field_conf[$sheet_key]:'';
                                     $work_list[$date][] = $work_name;
                                 }
                             }
-                       // }
+                        }
                     }
 
-                    $msg = $user_data['real_name']."平安！  以下是您這季接下來的服事，請預備心呦~\n";
+                    $msg = $user_data['real_name']."平安！ 以下是您這季接下來的服事，請預備心呦~\n";
                     foreach ($work_list as $work_date => $work_val) {
                         $msg .= $work_date."  ". implode('、',$work_val)."\n";
                     }
