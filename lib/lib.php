@@ -24,7 +24,7 @@
 
             $sql = "SELECT *
                     FROM   sheet_notify_notify_log
-                    ORDER BY create_time ASC";
+                    ORDER BY create_time DESC";
             $rs = $this->db->Execute($sql);
             if($rs && $rs->RecordCount() > 0){
                 return $rs->getAll();
