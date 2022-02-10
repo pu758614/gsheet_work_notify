@@ -171,7 +171,7 @@ foreach ($client->parseEvents() as $event) {
                     $result = $client->reply_text($event['replyToken'],$msg);
                     break;
                 case 'instruction':
-                    $msg = "改週一提醒請輸入「set：1」\n改週二提醒請輸入「set：2」\n...依此類推，數字為0~6(週日~週六)\n關閉提醒請輸入「off」\n開啟提醒請輸入「on」\n\n*不分大小寫、全半形";
+                    $msg = "改週一提醒請輸入「set：1」\n改週二提醒請輸入「set：2」\n...依此類推，數字為0~6(週日~週六)\n\n關閉提醒請輸入「off」\n開啟提醒請輸入「on」\n\n*不分大小寫、全半形";
                     $result = $client->reply_text($event['replyToken'],$msg);
                     break;
                 default:
