@@ -34,9 +34,7 @@ foreach ($client->parseEvents() as $event) {
     }else{
         $user_id = $user_data['id'];
     }
-    echo '<pre>';
-    print_r($event);
-    echo '</pre>';
+
     switch ($event['type']) {
         case 'message':
             $message = $event['message'];
@@ -166,6 +164,9 @@ foreach ($client->parseEvents() as $event) {
                 "modify_time" => date('Y-m-d H:i:s')
             );
             $db->updateData("sheet_notify_user",$data,array("id"=>$user_id));
+            break;
+        case 'postback':
+            $result = $client->reply_text($event['replyToken'],json_encode($event,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
             break;
         default:
             error_log('Unsupported event type: ' . $event['type']);
