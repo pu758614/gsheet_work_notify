@@ -50,48 +50,7 @@ foreach ($client->parseEvents() as $event) {
             $text = str_replace(' ','',$text);
             switch ($text) {
                 case 'all':
-                    $spreadsheet_id   = $db->getConfigValue('sheet_code');
-                    $user_list_result = $db->getAllSheetUser($user_data['line_user_uuid']);
-                    $user_list        = isset($user_list_result['data'])?$user_list_result['data']:array();
-                    $sheet_list       = $db->getGoogleSheet($spreadsheet_id);
-                    $work_field_conf = array(
-                        "1"  => "會前禱告",
-                        "2"  => "司會",
-                        "3"  => "敬拜主領",
-                        "4"  => "配唱",
-                        "5"  => "配唱",
-                        "6"  => "司琴",
-                        "7"  => "司鼓",
-                        "8"  => "視聽",
-                        "9"  => "視聽",
-                        "14" => "破冰",
-                        "15" => "詩歌",
-                    );
 
-                    $work_list = array();
-
-                    foreach ($sheet_list as $key => $sheet_data) {
-                        if($key<=3){
-                            continue;
-                        }
-                        $date = $sheet_data[0];
-                        if(strtotime($sheet_data[0])>= strtotime(date('m/d'))){
-                            foreach ($sheet_data as $sheet_key => $sheet_val) {
-                                if(in_array($sheet_val,$user_list)){
-                                    $work_name = isset($work_field_conf[$sheet_key])?$work_field_conf[$sheet_key]:'';
-                                    $work_list[$date][] = $work_name;
-                                }
-                            }
-                        }
-                    }
-
-                    $msg = $user_data['real_name']."平安！ 以下是您這季接下來的服事，請預備心呦~\n";
-                    foreach ($work_list as $work_date => $work_val) {
-                        $msg .= $work_date."  ". implode('、',$work_val)."\n";
-                    }
-
-                    $result = $client->reply_text($event['replyToken'],$msg);
-                    break;
 
                 default:
                     $str_arr = explode(":",$text);
@@ -166,6 +125,66 @@ foreach ($client->parseEvents() as $event) {
             $db->updateData("sheet_notify_user",$data,array("id"=>$user_id));
             break;
         case 'postback':
+            $message = $event['postback']['data'];
+            switch ($variable) {
+                case 'all':
+                    $spreadsheet_id   = $db->getConfigValue('sheet_code');
+                    $user_list_result = $db->getAllSheetUser($user_data['line_user_uuid']);
+                    $user_list        = isset($user_list_result['data'])?$user_list_result['data']:array();
+                    $sheet_list       = $db->getGoogleSheet($spreadsheet_id);
+                    $work_field_conf = array(
+                        "1"  => "會前禱告",
+                        "2"  => "司會",
+                        "3"  => "敬拜主領",
+                        "4"  => "配唱",
+                        "5"  => "配唱",
+                        "6"  => "司琴",
+                        "7"  => "司鼓",
+                        "8"  => "視聽",
+                        "9"  => "視聽",
+                        "14" => "破冰",
+                        "15" => "詩歌",
+                    );
+
+                    $work_list = array();
+
+                    foreach ($sheet_list as $key => $sheet_data) {
+                        if($key<=3){
+                            continue;
+                        }
+                        $date = $sheet_data[0];
+                        if(strtotime($sheet_data[0])>= strtotime(date('m/d'))){
+                            foreach ($sheet_data as $sheet_key => $sheet_val) {
+                                if(in_array($sheet_val,$user_list)){
+                                    $work_name = isset($work_field_conf[$sheet_key])?$work_field_conf[$sheet_key]:'';
+                                    $work_list[$date][] = $work_name;
+                                }
+                            }
+                        }
+                    }
+
+                    $msg = $user_data['real_name']."平安！ 以下是您這季接下來的服事，請預備心呦~\n";
+                    foreach ($work_list as $work_date => $work_val) {
+                        $msg .= $work_date."  ". implode('、',$work_val)."\n";
+                    }
+
+                    $result = $client->reply_text($event['replyToken'],$msg);
+                    break;
+                case 'instruction':
+                    $msg = "改週一提醒請輸入「set：1」\n
+                    改週二提醒請輸入「set：2」\n
+                    ...依此類推，數字為0~6(週日~週六)\n\n
+
+                    關閉提醒請輸入「off」\n
+                    開啟提醒請輸入「on」\n\n
+
+                    *不分大小寫、全半形";
+                    $result = $client->reply_text($event['replyToken'],$msg);
+                    break;
+                default:
+                    # code...
+                    break;
+            }
             $result = $client->reply_text($event['replyToken'],json_encode($event,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
             break;
         default:
