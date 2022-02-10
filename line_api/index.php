@@ -126,7 +126,7 @@ foreach ($client->parseEvents() as $event) {
             break;
         case 'postback':
             $message = $event['postback']['data'];
-            switch ($variable) {
+            switch ($message) {
                 case 'all':
                     $spreadsheet_id   = $db->getConfigValue('sheet_code');
                     $user_list_result = $db->getAllSheetUser($user_data['line_user_uuid']);
@@ -185,7 +185,7 @@ foreach ($client->parseEvents() as $event) {
                     # code...
                     break;
             }
-            $result = $client->reply_text($event['replyToken'],json_encode($event,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+           // $result = $client->reply_text($event['replyToken'],json_encode($event,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
             break;
         default:
             error_log('Unsupported event type: ' . $event['type']);
