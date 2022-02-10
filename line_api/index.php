@@ -116,6 +116,17 @@ foreach ($client->parseEvents() as $event) {
                 "modify_time" => date('Y-m-d H:i:s')
             );
             $db->updateData("sheet_notify_user",$data,array("id"=>$user_id));
+            if($event['type']=='follow'){
+                $send_msg = $user_data['real_name']."平安！ 我是您的服事提醒小天使，我會每週提醒您當週的服事！\n但請注意，有時候我的資訊會錯誤或是睡過頭忘記了XD，\n所以還是請您以教會週報、群組服事表為主喔！\n\n  操作方式為點選下方選單日~六設定通知日，若不想接收通知請點選「關閉提醒」。\n\n ";
+                if($user_data['enable_notify']==0){
+                    $send_msg .= '目前為關閉提醒';
+                }else{
+                    $send_msg .= '目前提醒時間為每週'.$change_week_day_cn_conf[$user_data['notify_day']];
+                }
+
+                $result = $client->reply_text($event['replyToken'],$send_msg);
+            }
+
             break;
         case 'postback':
             $send_msg = '';
@@ -207,7 +218,7 @@ foreach ($client->parseEvents() as $event) {
                     $result = $client->reply_text($event['replyToken'],$send_msg);
                     break;
                 case 'instruction':
-                    $send_msg = "點選上方日~六設定通知日，若不想接收通知請點選「關閉提醒」。\n\n ";
+                    $send_msg = "點選下方選單日~六設定通知日，若不想接收通知請點選「關閉提醒」。\n\n ";
                     if($user_data['enable_notify']==0){
                         $send_msg .= '目前為關閉提醒';
                     }else{
