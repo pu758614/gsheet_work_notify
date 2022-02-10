@@ -34,7 +34,15 @@ foreach ($client->parseEvents() as $event) {
     }else{
         $user_id = $user_data['id'];
     }
-
+    $change_week_day_cn_conf = array(
+        '0' => "日",
+        '1' => "一",
+        '2' => "二",
+        '3' => "三",
+        '4' => "四",
+        '5' => "五",
+        '6' => "六",
+    );
     switch ($event['type']) {
         case 'message':
             $message = $event['message'];
@@ -51,15 +59,7 @@ foreach ($client->parseEvents() as $event) {
             $str_arr = explode(":",$text);
             $action  = isset($str_arr[0])?$str_arr[0]:'';
             $val     = isset($str_arr[1])?$str_arr[1]:'';
-            $change_week_day_cn_conf = array(
-                '0' => "日",
-                '1' => "一",
-                '2' => "二",
-                '3' => "三",
-                '4' => "四",
-                '5' => "五",
-                '6' => "六",
-            );
+
             $update_data = array(
                 "modify_time" => date('Y-m-d H:i:s')
             );
