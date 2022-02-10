@@ -34,6 +34,9 @@ foreach ($client->parseEvents() as $event) {
     }else{
         $user_id = $user_data['id'];
     }
+    echo '<pre>';
+    print_r($event);
+    echo '</pre>';
     switch ($event['type']) {
         case 'message':
             $message = $event['message'];
