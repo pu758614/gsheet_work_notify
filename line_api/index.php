@@ -43,6 +43,7 @@ foreach ($client->parseEvents() as $event) {
         '5' => "五",
         '6' => "六",
     );
+    $notify_user_name = ($user_data['real_name']!='')?$user_data['real_name']:$user_data['line_name'];
     switch ($event['type']) {
         case 'message':
             $message = $event['message'];
@@ -117,7 +118,7 @@ foreach ($client->parseEvents() as $event) {
             );
             $db->updateData("sheet_notify_user",$data,array("id"=>$user_id));
             if($event['type']=='follow'){
-                $send_msg = $user_data['line_name']."平安！ 我是您的服事提醒小天使，我會每週提醒您當週的服事！\n但請注意，有時候我的資訊會錯誤或是睡過頭忘記了XD，\n所以還是請您以教會週報、群組服事表為主喔！\n\n操作方式為點選下方選單日~六設定通知日，若不想接收通知請點選「關閉提醒」。\n\n";
+                $send_msg = $notify_user_name."平安！ 我是您的服事提醒小天使，我會每週提醒您當週的服事！\n但請注意，有時候我的資訊會錯誤或是睡過頭忘記了XD，\n所以還是請您以教會週報、群組服事表為主喔！\n\n操作方式為點選下方選單日~六設定通知日，若不想接收通知請點選「關閉提醒」。\n\n";
                 if($user_data['enable_notify']==0){
                     $send_msg .= '目前為關閉提醒';
                 }else{
@@ -147,14 +148,11 @@ foreach ($client->parseEvents() as $event) {
                         'enable_notify' => 1
                     );
 
-                    $msg = "已啟動提醒，提醒時間為每週".$change_week_day_cn_conf[$day];
-
                     $result = $db->updateData("sheet_notify_user",$update_data,array("id"=>$user_id));
-                    $send_msg = '';
                     if($result){
-                        $send_msg = "設定成功，".$msg."。";
+                        $send_msg = "收到！我將會在每週".$change_week_day_cn_conf[$day]."提醒".$notify_user_name."當週的服事！";
                     }else{
-                        $send_msg = "設定失敗。";
+                        $send_msg = "設定提醒失敗惹。QQ";
                     }
                     $result = $client->reply_text($event['replyToken'],$send_msg);
 
@@ -166,9 +164,9 @@ foreach ($client->parseEvents() as $event) {
                     );
                     $result = $db->updateData("sheet_notify_user",$update_data,array("id"=>$user_id));
                     if($result){
-                        $send_msg = "設定成功，已經關閉提醒";
+                        $send_msg = "好的！我將不會再打擾".$notify_user_name."了，如果想再找我幫忙，可以點選下方選單的提醒日，將會重新開啟提醒呦~";
                     }else{
-                        $send_msg = "設定失敗。";
+                        $send_msg = "關閉提醒失敗惹。QQ";
                     }
                     $result = $client->reply_text($event['replyToken'],$send_msg);
 
@@ -208,7 +206,7 @@ foreach ($client->parseEvents() as $event) {
                         }
                     }
 
-                    $msg = $user_data['real_name']."平安！ 以下是您這季接下來的服事，請預備心呦~\n";
+                    $msg = $notify_user_name."平安！ 以下是您這季接下來的服事，請預備心呦~\n";
                     $work_sheet = array();
                     foreach ($work_list as $work_date => $work_val) {
                         $work_sheet[] = $work_date."  ". implode('、',$work_val);
@@ -218,7 +216,7 @@ foreach ($client->parseEvents() as $event) {
                     $result = $client->reply_text($event['replyToken'],$send_msg);
                     break;
                 case 'instruction':
-                    $send_msg = "點選下方選單日~六設定通知日，若不想接收通知請點選「關閉提醒」。\n\n";
+                    $send_msg = "嗨".$notify_user_name."~ 您可以點選下方選單日~六設定通知日，若不想接收通知請點選「關閉提醒」。\n\n";
                     if($user_data['enable_notify']==0){
                         $send_msg .= '目前為關閉提醒';
                     }else{
