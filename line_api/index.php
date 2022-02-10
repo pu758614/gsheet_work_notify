@@ -218,7 +218,7 @@ foreach ($client->parseEvents() as $event) {
                     $result = $client->reply_text($event['replyToken'],$send_msg);
                     break;
                 case 'instruction':
-                    $send_msg = "點選下方選單日~六設定通知日，若不想接收通知請點選「關閉提醒」。\n\n ";
+                    $send_msg = "點選下方選單日~六設定通知日，若不想接收通知請點選「關閉提醒」。\n\n";
                     if($user_data['enable_notify']==0){
                         $send_msg .= '目前為關閉提醒';
                     }else{
