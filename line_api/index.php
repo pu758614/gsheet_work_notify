@@ -126,8 +126,8 @@ foreach ($client->parseEvents() as $event) {
                     $send_msg .= '目前提醒時間為每週'.$change_week_day_cn_conf[$user_data['notify_day']];
                 }
 
-                $result = $client->reply_text($event['replyToken'],$send_msg);
-                $result = $client->reply_text($event['replyToken'],"By the way ，若您是剛加入我好友，我還不認識你，所以功能應該是無法使用XD\n還請等待後台管理者綁定帳號，或主動通知管理者協助綁定~");
+                $result = $client->reply_text($event['replyToken'],$send_msg."\n\nBy the way ，若您是剛加入我好友，我還不認識你，所以功能應該是無法使用XD\n還請等待後台管理者綁定帳號，或主動通知管理者協助綁定~");
+
             }
 
             break;
