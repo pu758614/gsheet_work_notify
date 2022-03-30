@@ -9,7 +9,6 @@
                 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__."/..");
                 $dotenv->load();
             }
-
             $host      = isset($_ENV['DB_HOST'])?$_ENV['DB_HOST']:'';
             $user_name = isset($_ENV['DB_USER'])?$_ENV['DB_USER']:'';
             $psw       = isset($_ENV['DB_PSW'])?$_ENV['DB_PSW']:'';

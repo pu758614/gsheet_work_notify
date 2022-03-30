@@ -1,4 +1,6 @@
 <?php
+
+    ini_set('display_errors','1');
     require 'vendor/autoload.php';
     include_once("lib/lib.php");
     include_once("lib/TemplatePower/class.TemplatePower.inc.php");

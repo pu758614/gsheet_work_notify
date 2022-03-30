@@ -15,6 +15,7 @@ $channel_access_token = isset($_ENV['CHANNEL_ACCESS_TOKEN'])?$_ENV['CHANNEL_ACCE
 $channel_secret       = isset($_ENV['CHANNEL_SECRET'])?$_ENV['CHANNEL_SECRET']:'';
 $db = new db_lib();
 $client = new LINEBotTiny($channel_access_token, $channel_secret);
+
 foreach ($client->parseEvents() as $event) {
 
     $line_uuid = $event['source']['userId'];
@@ -29,7 +30,7 @@ foreach ($client->parseEvents() as $event) {
             'modify_time'    => date('Y-m-d H:i:s'),
             'create_time'    => date('Y-m-d H:i:s'),
         ));
-
+        http://128.199.189.93/gsheet_work_notify/
         $user_data = $db->getSingleById('sheet_notify_user','id',$user_id);
     }else{
         $user_id = $user_data['id'];
@@ -185,6 +186,8 @@ foreach ($client->parseEvents() as $event) {
                         "7"  => "司鼓",
                         "8"  => "視聽",
                         "9"  => "視聽",
+                        "10"  => "司獻",
+                        "11"  => "司獻",
                         "14" => "破冰",
                         "15" => "詩歌",
                     );
