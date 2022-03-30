@@ -127,6 +127,7 @@ foreach ($client->parseEvents() as $event) {
                 }
 
                 $result = $client->reply_text($event['replyToken'],$send_msg);
+                $result = $client->reply_text($event['replyToken'],"By the way ，若您是剛加入我好友，我還不認識你，所以功能應該是無法使用XD\n還請等待後台管理者綁定帳號，或主動通知管理者協助綁定~");
             }
 
             break;
@@ -186,8 +187,8 @@ foreach ($client->parseEvents() as $event) {
                         "7"  => "司鼓",
                         "8"  => "視聽",
                         "9"  => "視聽",
-                        "10"  => "司獻",
-                        "11"  => "司獻",
+                        "10" => "司獻",
+                        "11" => "司獻",
                         "14" => "破冰",
                         "15" => "詩歌",
                     );
