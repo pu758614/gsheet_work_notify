@@ -66,7 +66,9 @@
             // 設定權限
             $client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
             $client->setAccessType('offline');
-
+            echo '<pre>';
+            print_r($id);
+            echo '</pre>';
             // 引入金鑰
             $config = array(
                 "type"         => isset($_ENV['GOOGLE_SHEET_TYPE'])?$_ENV['GOOGLE_SHEET_TYPE']:'',
@@ -86,6 +88,7 @@
             try {
                 $response = $service->spreadsheets_values->get($id, $getRange);
                 $data = $response->getValues();
+
             } catch (Exception $e) {
                 error_log("get sheet error.id: $id response:".$e->getMessage(),JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             }

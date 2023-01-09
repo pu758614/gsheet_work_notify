@@ -52,50 +52,90 @@
     $now_day = isset($day_conf[$now_day])?$now_day:$day_cn_conf[date("l")];
     $user_item_list = array();
 
+
+    $field_code_conf = array(
+        "B" => '會前禱告',
+        "C" => '司會',
+        "D" => '敬拜主領',
+        "E" => '配唱',
+        "F" => '配唱',
+        "G" => '配唱',
+        "H" => '司琴',
+        "I" => '司鼓',
+        "J" => '視聽',
+        "K" => '視聽',
+        "L" => '司獻',
+        "M" => '司獻',
+        "P" => '司獻',
+        "P" => '小組破冰',
+        "Q" => '小組詩歌',
+        "R" => '信息複習',
+    );
+    $alphabet = range('A', 'Z');
+    $field_num_conf = array();
+    foreach ($field_code_conf as $key => $service_item) {
+        $field_num = array_search($key, $alphabet);
+        $field_num_conf[$field_num] = $service_item;
+    }
+
     foreach ($nex_data as $key => $name) {
         $user_data = getUserInfoForName($name);
 
         if(empty($user_data)){
             continue;
         }
-        $user_id = $user_data['user_id'];
-        switch ($key) {
-            case '1':
-                $user_item_list[$user_id][] = '會前禱告';
-                break;
-            case '2':
-                $user_item_list[$user_id][] = '司會';
-                break;
-            case '3':
-                $user_item_list[$user_id][] = '敬拜主領';
-                break;
-            case '4':
-            case '5':
-                $user_item_list[$user_id][] = '配唱';
-                break;
-            case '6':
-                $user_item_list[$user_id][] = '司琴';
-                break;
-            case '7':
-                $user_item_list[$user_id][] = '司鼓';
-                break;
-            case '8':
-            case '9':
-                $user_item_list[$user_id][] = '視聽';
-                break;
-            case '10':
-            case '11':
-                $user_item_list[$user_id][] = '司獻';
-                break;
-            case '14':
-                $user_item_list[$user_id][] = '小組破冰';
-                break;
-            case '15':
-                $user_item_list[$user_id][] = '小組詩歌';
-                break;
-        }
-    }
 
+        $user_id = $user_data['user_id'];
+
+        if(isset($field_num_conf[$key])){
+            $user_item_list[$user_id][] = $field_num_conf[$key];
+        }
+
+        // switch ($key) {
+
+        //     case '1':
+        //         $user_item_list[$user_id][] = '會前禱告';
+        //         break;
+        //     case '2':
+        //         $user_item_list[$user_id][] = '司會';
+        //         break;
+        //     case '3':
+        //         $user_item_list[$user_id][] = '敬拜主領';
+        //         break;
+        //     case '4':
+        //     case '5':
+        //     case '6':
+        //         $user_item_list[$user_id][] = '配唱';
+        //         break;
+        //     case '7':
+        //         $user_item_list[$user_id][] = '司琴';
+        //         break;
+        //     case '8':
+        //         $user_item_list[$user_id][] = '司鼓';
+        //         break;
+        //     case '9':
+        //     case '10':
+        //         $user_item_list[$user_id][] = '視聽';
+        //         break;
+        //     case '11':
+        //     case '12':
+        //         $user_item_list[$user_id][] = '司獻';
+        //         break;
+        //     case '15':
+        //         $user_item_list[$user_id][] = '小組破冰';
+        //         break;
+        //     case '16':
+        //         $user_item_list[$user_id][] = '小組詩歌';
+        //         break;
+        //     case '17':
+        //         $user_item_list[$user_id][] = '信息複習';
+        //         break;
+        // }
+    }
+    echo '<pre>';
+    print_r($user_item_list);
+    echo '</pre>';
+    exit();
 
     foreach ($user_item_list as $user_id => $items) {
         $user_data = $db->getSingleByArray('sheet_notify_user',array(
