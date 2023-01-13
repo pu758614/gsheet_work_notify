@@ -193,6 +193,7 @@ foreach ($client->parseEvents() as $event) {
                         "13" => "破冰",
                         "14" => "詩歌",
                         "15" => '信息複習',
+                        "16" => '小組晚餐預備',
                     );
 
                     $work_list = array();
