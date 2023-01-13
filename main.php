@@ -95,10 +95,6 @@
 
     }
 
-    echo '<pre>';
-    print_r($user_item_list);
-    echo '</pre>';
-    exit();
     foreach ($user_item_list as $user_id => $items) {
         $user_data = $db->getSingleByArray('sheet_notify_user',array(
             'id'     => $user_id,
