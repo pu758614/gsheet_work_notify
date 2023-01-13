@@ -66,9 +66,7 @@
             // 設定權限
             $client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
             $client->setAccessType('offline');
-            echo '<pre>';
-            print_r($id);
-            echo '</pre>';
+
             // 引入金鑰
             $config = array(
                 "type"         => isset($_ENV['GOOGLE_SHEET_TYPE'])?$_ENV['GOOGLE_SHEET_TYPE']:'',
@@ -82,7 +80,7 @@
             // 建立 Google Sheets Service
             $service = new \Google_Service_Sheets($client);
             // 取得 Sheet 範圍
-            $getRange = "A:P";
+            $getRange = "A:R";
             // 讀取資料
             $data = array();
             try {
