@@ -176,7 +176,8 @@ foreach ($client->parseEvents() as $event) {
                     $spreadsheet_id   = $db->getConfigValue('sheet_code');
                     $user_list_result = $db->getAllSheetUser($user_data['line_user_uuid']);
                     $user_list        = isset($user_list_result['data'])?$user_list_result['data']:array();
-                    $sheet_list       = $db->getGoogleSheet($spreadsheet_id);
+                    $now_year = date("Y");
+                    $sheet_list       = $db->getGoogleSheet($spreadsheet_id,$now_year);
                     $work_field_conf = array(
                         "1"  => "會前禱告",
                         "2"  => "司會",

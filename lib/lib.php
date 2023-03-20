@@ -59,7 +59,7 @@
             return $value;
         }
 
-        function getGoogleSheet($id){
+        function getGoogleSheet($id,$sheet_name=''){
             // 建立 Google Client
             $client = new \Google_Client();
             $client->setApplicationName('Google Sheets and PHP');
@@ -80,7 +80,7 @@
             // 建立 Google Sheets Service
             $service = new \Google_Service_Sheets($client);
             // 取得 Sheet 範圍
-            $getRange = "A:S";
+            $getRange = $sheet_name."!A:S";
             // 讀取資料
             $data = array();
             try {

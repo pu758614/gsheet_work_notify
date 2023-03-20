@@ -13,8 +13,8 @@
     $channel_secret       = isset($_ENV['CHANNEL_SECRET'])?$_ENV['CHANNEL_SECRET']:'';
     $spreadsheet_id       = $db->getConfigValue('sheet_code');
     $client = new LINEBotTiny($channel_access_token, $channel_secret);
-
-    $list_data      = $db->getGoogleSheet($spreadsheet_id);
+    $now_year = date("Y");
+    $list_data      = $db->getGoogleSheet($spreadsheet_id,$now_year);
 
     if(date("l")!='Saturday'){
         $next_day = date("n/j",strtotime("next Saturday"));
