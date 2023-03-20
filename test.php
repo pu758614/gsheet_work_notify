@@ -34,6 +34,6 @@ foreach ($field_code_conf as $key => $service_item) {
     $field_num = array_search($key, $alphabet);
     $field_num_conf[$field_num] = $service_item;
 }
-echo '<pre>';
-print_r($field_num_conf);
-echo '</pre>';
+// echo '<pre>';
+// print_r($field_num_conf);
+// echo '</pre>';

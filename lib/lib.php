@@ -24,10 +24,12 @@
             $sql = "SELECT *
                     FROM   sheet_notify_notify_log
                     ORDER BY create_time DESC";
-            $rs = $this->db->Execute($sql);
+            // $rs = $this->db->Execute($sql);
+            $rs = $this->db->SelectLimit($sql,50,0);
             if($rs && $rs->RecordCount() > 0){
                 return $rs->getAll();
             }else{
+                
             }
 
         }
