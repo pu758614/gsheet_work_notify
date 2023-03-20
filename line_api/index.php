@@ -214,17 +214,17 @@ foreach ($client->parseEvents() as $event) {
                             continue;
                         }
                         $date = $sheet_data[0];
-                        // if(strtotime($sheet_data[0])>= strtotime(date('m/d'))){
-                        foreach ($sheet_data as $sheet_key => $sheet_val) {
-                            if(in_array($sheet_val,$user_list)){
-                                $work_name = isset($work_field_conf[$sheet_key])?$work_field_conf[$sheet_key]:'';
-                                $work_list[$date][] = $work_name;
+                        if(strtotime($sheet_data[0])>= strtotime(date('m/d'))){
+                            foreach ($sheet_data as $sheet_key => $sheet_val) {
+                                if(in_array($sheet_val,$user_list)){
+                                    $work_name = isset($work_field_conf[$sheet_key])?$work_field_conf[$sheet_key]:'';
+                                    $work_list[$date][] = $work_name;
+                                }
                             }
                         }
-                        // }
                     }
 
-                    $msg = $notify_user_name."平安！ 以下是您這一季的服事，請預備心呦~\n";
+                    $msg = $notify_user_name."平安！ 以下是您接下來的服事，請預備心呦~\n";
                     $work_sheet = array();
                     foreach ($work_list as $work_date => $work_val) {
                         $work_sheet[] = $work_date."  ". implode('、',$work_val);
