@@ -9,12 +9,31 @@ $result = array(
     "msg"   => '',
     "data"  => ''
 );
-$db = new db_lib;
-$year = date("Y");
-echo $year;
-// $spreadsheet_id   = $db->getConfigValue('sheet_code');
-$spreadsheet_id = '1YC0ZVH-xyqAypAp47CnWzmTcFZWsyhRZGI7Gc_GEb5I';
-$list_data      = $db->getGoogleSheet($spreadsheet_id,$year);
+$field_code_conf = array(
+    "B" => '會前禱告',
+    "C" => '司會',
+    "D" => '敬拜主領',
+    "E" => '配唱',
+    "F" => '配唱',
+    "G" => '配唱',
+    "H" => '司琴',
+    "I" => '司鼓',
+    "J" => '視聽',
+    "K" => '視聽',
+    "L" => '司獻',
+    "M" => '司獻',
+    "P" => '司獻',
+    "P" => '小組破冰',
+    "Q" => '小組詩歌',
+    "R" => '信息複習',
+    "S" => '小組晚餐預備',
+);
+$alphabet = range('A', 'Z');
+$field_num_conf = array();
+foreach ($field_code_conf as $key => $service_item) {
+    $field_num = array_search($key, $alphabet);
+    $field_num_conf[$field_num] = $service_item;
+}
 echo '<pre>';
-print_r($list_data);
+print_r($field_num_conf);
 echo '</pre>';

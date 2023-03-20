@@ -178,24 +178,54 @@ foreach ($client->parseEvents() as $event) {
                     $user_list        = isset($user_list_result['data'])?$user_list_result['data']:array();
                     $now_year = date("Y");
                     $sheet_list       = $db->getGoogleSheet($spreadsheet_id,$now_year);
-                    $work_field_conf = array(
-                        "1"  => "會前禱告",
-                        "2"  => "司會",
-                        "3"  => "敬拜主領",
-                        "4"  => "配唱",
-                        "5"  => "配唱",
-                        "6"  => "配唱",
-                        "7"  => "司琴",
-                        "8"  => "司鼓",
-                        "9"  => "視聽",
-                        "10"  => "視聽",
-                        "11" => "司獻",
-                        "12" => "司獻",
-                        "13" => "破冰",
-                        "14" => "詩歌",
-                        "15" => '信息複習',
-                        "16" => '小組晚餐預備',
+
+                    $field_code_conf = array(
+                        "B" => '會前禱告',
+                        "C" => '司會',
+                        "D" => '敬拜主領',
+                        "E" => '配唱',
+                        "F" => '配唱',
+                        "G" => '配唱',
+                        "H" => '司琴',
+                        "I" => '司鼓',
+                        "J" => '視聽',
+                        "K" => '視聽',
+                        "L" => '司獻',
+                        "M" => '司獻',
+                        "P" => '司獻',
+                        "P" => '小組破冰',
+                        "Q" => '小組詩歌',
+                        "R" => '信息複習',
+                        "S" => '小組晚餐預備',
                     );
+                
+                    $alphabet = range('A', 'Z');
+                    $work_field_conf = array();
+                    foreach ($field_code_conf as $key => $service_item) {
+                        $field_num = array_search($key, $alphabet);
+                        $work_field_conf[$field_num] = $service_item;
+                    }
+                
+
+
+                    // $work_field_conf = array(
+                    //     "1"  => "會前禱告",
+                    //     "2"  => "司會",
+                    //     "3"  => "敬拜主領",
+                    //     "4"  => "配唱",
+                    //     "5"  => "配唱",
+                    //     "6"  => "配唱",
+                    //     "7"  => "司琴",
+                    //     "8"  => "司鼓",
+                    //     "9"  => "視聽",
+                    //     "10"  => "視聽",
+                    //     "11" => "司獻",
+                    //     "12" => "司獻",
+                    //     "13" => "破冰",
+                    //     "14" => "詩歌",
+                    //     "15" => '信息複習',
+                    //     "16" => '小組晚餐預備',
+                    // );
 
                     $work_list = array();
 
